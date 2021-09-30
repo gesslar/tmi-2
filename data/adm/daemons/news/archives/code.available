@@ -1,0 +1,59 @@
+---
+poster: Beek
+subject: >Installing Beek's newsreader on your TMI-2 mud
+date: Wed Dec 14 00:57:39 1994
+Mobydick writes:
+> You can download Beek's newsreader code, converted to work on TMI-2,
+> by our mudlib FTPD. The files you'll need to get are /obj/paper.c,
+> /adm/daemons/news_server.c, /std/rn.c, /cmds/adm/_newsadm.c, and
+> /include/newsreader.h. You'll also need to add NEWS_D to your daemons.h
+> file and CMD_SETNEWS to your commands.h file. Use the setnews command
+> to add or remove groups, and the paper object to read news.
+> Beek's newsreader code contains certain copyright restrictions. If you
+> download the code, please obey all those restrictions.
+> 
+> Moby
+
+A quick re: the copyright.  Two things really annoy me (well, one, the
+other is a fear of mine).  Basically, I'm pretty free with allowing
+other people to use whatever cool code I write, and I don't like
+it when other people either (1) profit off my code, or (2) don't
+return the favor.
+
+So if you want to use it, take the time to read the copywrite.  I',
+I've been nice enough to let you use the code; if you find a way
+to make it better, return the favor.
+
+-Beek
+
+
+---
+poster: Mobydick
+subject: Installing Beek's newsreader on your TMI-2 mud
+date: Tue Dec 13 00:15:28 1994
+You can download Beek's newsreader code, converted to work on TMI-2,
+by our mudlib FTPD. The files you'll need to get are /obj/paper.c,
+/adm/daemons/news_server.c, /std/rn.c, /cmds/adm/_newsadm.c, and
+/include/newsreader.h. You'll also need to add NEWS_D to your daemons.h
+file and CMD_SETNEWS to your commands.h file. Use the setnews command
+to add or remove groups, and the paper object to read news.
+Beek's newsreader code contains certain copyright restrictions. If you
+download the code, please obey all those restrictions.
+
+Moby
+
+
+---
+poster: Mobydick
+subject: This newsgroup
+date: Mon Dec 12 17:24:05 1994
+This newsgroup carries announcements of new code that is available
+for people running TMI-2 mudlibs. If people want to announce that
+code is available for other platforms, that would be appropriate for
+this group as well. Driver hacks could probably be announced here as
+well. In fact, almost anything mud-related that comes under the heading
+of giving code to people would be just fine.
+
+mobydick
+
+

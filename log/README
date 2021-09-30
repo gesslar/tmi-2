@@ -1,0 +1,9 @@
+    /log/
+
+    This directory contains your mud system logs.  To better organize
+    logs, subdirectories such as the following can be helpful:
+
+        /log/admin/     - should be reserved for admin sensitive functions
+        /log/driver/    - should be the directory used by your startmud script
+                          to redirect driver output
+        /log/network/   - should be reserved for network related functions

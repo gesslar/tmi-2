@@ -1,0 +1,212 @@
+816822044
+->Leto at Fri Jul  7 03:08:31 1995 in /d/Fooland/hall
+tell needs to set the reply property
+
+COMMENT:
+incoming intermud tells are NOW setting the property, however
+reply is not changed.. reply should force you to use tell, not
+just be a whole nother tell program
+-Drizzt Sat Jul  8 21:54:15 1995
+
+COMMENT:
+It does :)
+-Leto Mon Nov 20 01:00:44 1995
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-812482097
+Shakespeare at Sat Sep 30 19:28:17 1995 in /d/Fooland/hall
+Gwiz and code are getting a bad argument to call_other
+
+Expected: string or array or object Got: 0.
+Trace written to /log/catch   
+
+-Shakespeare
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-812644841
+Rust at Mon Oct  2 16:40:41 1995 in /obj/workroom#42
+tell leto@earth doesn't work even though it's an exact match
+because there's a mud named Earthdawn.
+
+John
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816822231
+->Punkette at Tue Oct  3 23:39:23 1995 in /d/Fooland/hall
+the intermud mail is looking for the dns_master file
+
+COMMENT:
+Fixed
+-Leto Mon Nov 20 01:03:51 1995
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831507258
+->Robocoder at Sat Nov  4 21:20:35 1995 in /d/Fooland/hall
+mudlist -a
+returns only one mud... hrm
+
+COMMENT:
+fixed - additonally regexp searching possible now
+-Brainstorm Tue May  7 23:14:18 1996
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818120809
+->Leto at Sun Nov 12 05:12:11 1995 in /d/Fooland/hall
+fix hostname
+
+COMMENT:
+Fixed
+-Leto Tue Dec  5 01:46:49 1995
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816742360
+Leto at Sun Nov 19 02:52:40 1995 in /d/Fooland/hall
+origin check in shutdown is wrong ;)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816746121
+Leto at Sun Nov 19 03:55:21 1995 in /u/l/leto/workroom
+fix do_more
+(moreing a directory goes badly wrong ;)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816746427
+Leto at Sun Nov 19 04:00:27 1995 in /d/Fooland/hall
+fix logging of demote/promotes when user is not logged on
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816785578
+Deathblade at Sun Nov 19 14:52:58 1995 in /d/Fooland/hall
+'clean here' in the adventurer's hall barfed.
+hmm... just tried scan -d and sc -d to see what objects are here.
+Both of those choked too :-(.  I see an axe, an orc, and the board.
+When I tried "sc -d" got an error about /adm/daemons/ref_d not
+loading.
+
+-Deathblade
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816786023
+Deathblade at Sun Nov 19 15:00:23 1995 in /d/Fooland/hall
+passwd doesn't seem to work right. I changed my password earlier
+today but it didn't "take" and I had to use my old one to get in.
+
+-Deathblade
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816822424
+->Deathblade at Sun Nov 19 15:24:49 1995 in /d/Fooland/hall
+a number of objects aren't loading. see /log/log.  specifically,
+eval, clean, and the aforementioned ref_d.
+
+-Deathblade
+
+COMMENT:
+Fixed.
+-Leto Mon Nov 20 01:07:04 1995
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-817274443
+Robocoder at Sat Nov 25 06:40:43 1995 in /d/TMI/rooms/bugroom
+Scan through lib source, and make sure objects that need the BOARD
+define get it from one file...it's currently defined in both mailer.h and
+mudlib.h...and cause a redefinition warning on some files (eg /cmds/wiz/_mail.c)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-817343569
+Robocoder at Sun Nov 26 01:52:49 1995 in /d/TMI/rooms/quad
+ChangeLog entries are screwy; it's being added incorrectly to /log/ChangeLog.
+Looks like the last line in /log/ChangeLog is being used to store the new
+entry...so it may not even be the current working directory
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-817386861
+Robocoder at Sun Nov 26 13:54:21 1995 in /d/TMI/rooms/quad
+'call' command isn't loading
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-819151108
+Leto at Sat Dec 16 23:58:28 1995 in /d/TMI/rooms/quad
+mudlist -a should show all muds, not one :)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-819154583
+Leto at Sun Dec 17 00:56:23 1995 in /u/l/leto/workroom
+fix channel.c in /adm/dameons/network/I3 to user the channel
+daemon for emotes too, instead of using users(); (shoots drizzt)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-820864188
+Logic at Fri Jan  5 18:49:48 1996 in /d/Fooland/cemetery
+The newspaper (i.e. newsreader) doesn't allow you to do things like
+"open door".  It errors out, saying that /std/rn.c wouldn't load.
+
+Logic
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-821054489
+Robocoder at Sun Jan  7 23:41:29 1996 in /d/TMI/rooms/quad
+/www/gateways/mudlist.c: broken ... can't find the DNS_MASTER  ;)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-821663598
+Logic at Mon Jan 15 00:53:18 1996 in /d/TMI/rooms/quad
+"mudlist lost wishes" fails, but "mudlist Lost Wishes" (note capitalization) works.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-822227974
+Robocoder at Sun Jan 21 13:39:34 1996 in /d/TMI/rooms/quad
+Something wrong in the i3 daemon... the router_socket object is destructed
+for some reason, and causes the i3 daemon to get out of sync, and die on
+i3 requests
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-822876589
+Leto at Mon Jan 29 01:49:49 1996 in /d/TMI/rooms/quad
+Fix update. 
+(I know what i mean :)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-826182122
+Mogwi at Thu Mar  7 18:32:02 1996 in /d/grid/rooms/11,10.grid
+in /d/grid/README
+You are refered to /doc/mudlib/vrgrid
+which I was told was changed to /doc/concepts/vrgrid
+just a typo
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-830269549
+Brainstorm at Tue Apr 23 15:25:49 1996 in /d/TMI/rooms/quad
+> ' %^RED%^Test%^RESET%^
+You say: %^RED%^Test%^RESET%^
+
+I think this is because the driver write() doesnt call
+relay_message in the user object.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831294665
+Brainstorm at Sun May  5 12:11:05 1996 in /d/TMI/rooms/quad
+ftpd.c - sometimes like about 30% the daemons sends a bit and 
+starts to send the same stuff all over agian, as long as it
+takes to fill up the proper file size of the file
+you try to get.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831365344
+Ciao at Mon May  6 07:49:04 1996 in /d/TMI/rooms/bugroom
+I did an rlog all, and saw brainstorm's complaint about color, in
+correct colors... when I viewed it with log BUGS, I saw it with the
+% ^ things still in there.
+also, I ftp'd in a color _who.c (~ciao/cmds/_colorwho.c) and it also
+doens't work right.... I see the % ^ COLOR % ^ strings.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831375476
+Brainstorm at Mon May  6 10:37:56 1996 in /d/TMI/rooms/quad
+_support.c - this commands still seems to use the DNS_MASTER.
+Either its obsolut due to the mudlist which shows service or
+it should be fixed to use I3 now.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831381987
+->Brainstorm at Mon May  6 10:44:46 1996 in /d/TMI/rooms/quad
+/cmds/file/_grep.c - a quick browse should this command to be
+not working at all.
+hold = ({ })
+and the next occurence of hold is:
+   if(!hold || !sizeof(hold) || hold == ({}))
+   write("Grep: No pattern matches found.\n");
+
+COMMENT:
+Okay, was my fault. Grep didnt like " enclosed patterns like
+grep " MSG" /include/*.h
+I included that now and made help return a string.
+-Brainstorm Mon May  6 12:26:27 1996
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831692211
+Ciao at Fri May 10 02:36:51 1996 in /u/c/ciao/workroom
+If you type the name of a channel w/ no text afterward, it gives an error
+> gwiz
+*call_other() couldn't find object
+Trace written to /log/runtime
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831727955
+Leto at Fri May 10 12:32:35 1996 in /d/TMI/rooms/quad
+when going netdead without the mud finding out, it barfs with
+bad arg 2 to exec.
+add some checks there
+

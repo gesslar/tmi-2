@@ -1,0 +1,16 @@
+d/Conf/obj/vendor_D.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_D.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_C.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_C.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_B.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_B.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_A.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_A.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_A.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_A.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_B.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_B.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_C.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_C.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line
+d/Conf/obj/vendor_D.c line 36: Warning: Return type doesn't match prototype ( void vs int ) before  {
+d/Conf/obj/vendor_D.c line 38: Warning: Return type doesn't match prototype ( void vs int ) before the end of line

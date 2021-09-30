@@ -1,0 +1,555 @@
+---
+poster: Mobydick
+subject: >Object Persistance
+date: Wed Dec 14 20:39:33 1994
+First, we have to define what we mean by "object persistance", just so
+we're all talking about the same thing :)  I'm going to chose a fairly
+strict definition: object persistance means that no object is ever cloned
+or destructed. All objects are loaded at start time and stick around
+forever, though they may change hands or fall into disuse for a while
+if sold to shops or left in remote areas.
+If one wanted to implement this kind of behavior under MudOS/TMI-2, there
+are three main problems that have to be addressed. Two of them are coding
+problems, the other is conceptual.
+The coding problem is to defeat the clone_object() and destruct() efuns
+so that they're not used (or in the case of clone_object(), is used only
+to initially load the objects). It's simple enough to override these two
+efuns with simuls: however, this does Bad Things to traditional memory
+management. It's necessary to replace old destruction-based memory
+management with a recylcing mentality. When a monster needs to acquire
+a sword, it can't just clone one anymore: it has to look for one that's
+not currently in use and appropriate it. Thus, there has to be some
+concept of when an object can be appropriated. I haven't thought
+a whole lot about this problem, but it would seem simple to stick with
+the existing clean_up mechanism. Instead of desting the object, however,
+move it to a holding area. Any object in the holding area can be reclaimed
+by any monster, room, or what-have-you that needs it. You'll want to
+create a reclaim_object() simul that would be used where clone_object()
+is usually used now: you'll also need to handle cases where a monster
+tries to reclaim an object but none is available.
+The second problem is dealing with shutdowns. The best thing to do is
+use DGD which has a state save, but you've ruled that out :) If you want
+to use MudOS, you'll have to have each object save all of its data to
+disk. That means, right off the bat, you can't use object pointers, because
+they don't save. You'll have to do all reference to other objects by file
+name instead of by pointer, because the file names will restore properly
+at load time. There is the problem of object numbers, but I think that
+if you load all the mud's objects at start time, you should be able to
+get all objects to come up with a consistent numbering.
+An alternative would be not to use clones: just have all objects be
+associated with a unique file, and disable clone_object() entirely. This
+wouldn't waste too much disk space because you can always have sword6.c be:
+#include "/obj/sword1.c"
+which gives you the same code with its own file name. It also saves the
+problem of determining save file names: if you have /obj/sword#10 and
+/obj/sword#11, you can't save both of them to /obj/sword.o. Something
+like that needs to be worked out, anyway.
+The conceptual problem is simply to explain where new users come from and
+what happens to them when they die. (Same problem for monsters). If you
+keep all other objects limited but allow new users to be cloned at will,
+soon there won't be enough objects to go around. I think it will be
+necessary to limit the total number of characters on the system (not logged
+on: the total number of saved characters). This may mean that a new player
+might log on and not be able to create a character, but I think that can be
+held down in two ways; first, aggressive purging of characters that haven't
+logged in (with exceptions for school breaks) and by making death permanent.
+When a character dies, that user object becomes free for someone else to
+create a new character. A related problem is explaining where users go when
+they log out. In a nonpersistant world you can ignore this problem, but if
+users are taking objects with them when they go, you need to explain where
+they went, where those objects are, and figure out some method for returning
+those objects to the game if the character doesn't log in again for a while.
+Similarly, there needs to be some monster life cycle so that when a monster
+is killed, its body becomes available for a new monster to be loaded
+somewhere.
+
+
+---
+poster: Decker
+subject: Hey!
+date: Tue Dec 13 20:17:22 1994
+Let's get some messages on this thing!  Hmm..coding
+questions.  Ok here's a question:
+
+How can I use the vi() function?  This doesn't seem to work and
+I wanna use the wonderful complex vi editor in my unix box.  :)
+
+Nah I'm sorry I've been out of the LPC world too long.  I'm not even
+sure what's changed in MudOS other than some rewriting and changes
+to the internals.
+
+Anyway, just wanted to see more postings to this nice addition to
+TMI's mudlib.  Beek has done a good job writing this me thinks.
+
+Later..I have a final exam.  :)
+
+Decker
+
+
+---
+poster: Meronda
+subject: Object Persistance
+date: Tue Dec 13 19:13:11 1994
+I have heard many different things on the subject of saving objects
+for players, and I am interested in knowing if anyone has ideas on
+the most efficient way to handle this (if at all) using MudOS and
+the TMI 1.2 lib.
+
+Meronda/Kyla on Cinder
+
+
+---
+poster: Mobydick
+subject: this newsgroup
+date: Mon Dec 12 17:25:23 1994
+This newsgroup is meant to handle coding questions that are too
+complicated or involved for the question channel and which don't fit
+nicely under one of the boards available.
+
+Mobydick
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+
+---
+poster: Malic
+subject: >Moving Monster
+date: Thu Dec 29 23:44:31 1994
+Darshu writes:
+> Been having much problems with a certain moving monster.  I copyed the code
+> from cat.c, which is where the problem is.  I believe that the set ("speed",
+> is not working correctly, but i could be wrong.  The problem is that the
+> moving monster will at first move at a normal rate, then the speed will 
+> increase with time.  It will eventually get so fast, it will enter, exit, and
+> enter a room again, before u can even type a letter.  Then it just dies out
+> somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+> My question is ..., is there another way, or another example i could look at.
+> So as too have a moving monster?
+
+Good guess, but not quite right.  Movement is handled by callout a callout
+loop, of duration 'speed'.  Your problem has the symptoms of extra loops
+being added, out of phase with the original loop.  Eventually at any given
+moment you have one of the loops calling move_around().  You can confirm
+this with the 'codfish', probably found in Archimede's directory. (ask him
+for one, he gives them away, free even).
+
+I don't see an obvious reason for this to happen in the standard cat, but there
+is a flaw you may have encountered:  Every time set("moving",1) is called in
+the cat, an extra loop is created.  It should check if it's already moving
+with a call_out_info() call.  On your end, you should look for these extra
+set() calls.
+
+Malic
+
+
+---
+poster: Darshu
+subject: Moving Monster
+date: Thu Dec 22 20:38:07 1994
+Been having much problems with a certain moving monster.  I copyed the code
+from cat.c, which is where the problem is.  I believe that the set ("speed",
+is not working correctly, but i could be wrong.  The problem is that the
+moving monster will at first move at a normal rate, then the speed will 
+increase with time.  It will eventually get so fast, it will enter, exit, and
+enter a room again, before u can even type a letter.  Then it just dies out
+somehow, and desctructs itself.  If cat.c is load you will see what i mean.
+My question is ..., is there another way, or another example i could look at.
+So as too have a moving monster?
+
+

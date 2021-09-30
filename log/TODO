@@ -1,0 +1,109 @@
+805082154
+Leto at Fri Jul  7 03:55:54 1995 in /d/Fooland/hall
+rewrite telnetd.c from scratch to use banish code
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-811895176
+Robocoder at Sun Sep 24 00:26:16 1995 in /u/l/leto/workroom
+Should clean up the 'mudlist' command's output...
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-816745986
+Leto at Sun Nov 19 03:53:06 1995 in /u/l/leto/workroom
+fix inherit warnings in low level obs
+check admin commands that changed from using this_player to use
+a string instead.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818090098
+Leto at Mon Dec  4 17:14:58 1995 in /d/TMI/rooms/bugroom
+Update www pages, esp add mudlist and lurker, fix address and
+references
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818090108
+Leto at Mon Dec  4 17:15:08 1995 in /d/TMI/rooms/bugroom
+Fix redefine of BOARD
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818194396
+Leto at Tue Dec  5 22:13:16 1995 in /d/TMI/rooms/bugroom
+Fix %^RESET%^ calls (check the efun)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818203053
+Leto at Wed Dec  6 00:37:33 1995 in /d/TMI/rooms/quad
+agree on a place for socket.c ? :)
+I think we have it in /std /std/socket/ and /adm/daemons/network
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818203071
+Leto at Wed Dec  6 00:37:51 1995 in /d/TMI/rooms/quad
+change all refs of i3.h to net/i3.h and move the file
+(Drizzt logic, don't ask ;)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831499110
+->Leto at Wed Dec  6 02:37:46 1995 in /d/TMI/rooms/quad
+Double check and fix channels.
+Intermud channels are called imud_code and imud_gossip. Here we're
+translating them to code and gwiz.
+Prob change gwiz into igossip. code can stay the same
+Esp with emotes we get problems. Eg referencing gwiz is fine , except when using emotes
+
+COMMENT:
+fixed - though gwiz still needs to be changed to igossip 
+do that in /adm/etc/channels
+-Brainstorm Tue May  7 20:58:30 1996
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818210314
+Leto at Wed Dec  6 02:38:34 1995 in /d/TMI/rooms/quad
+fix/check reconnecting to the I3 router :)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-818210656
+Leto at Wed Dec  6 02:44:16 1995 in /d/TMI/rooms/quad
+Maybe finally fix help here like on Earthmud. So help() returns
+a string instead of and int ?
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-819071870
+Leto at Sat Dec 16 01:57:50 1995 in /d/TMI/rooms/quad
+change doc_d to make it possible to assign certain levels
+to certain docdirs. That way you have have efun docs displayed
+only to wizards etc :)
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-825895569
+Leto at Mon Mar  4 10:56:09 1996 in /d/TMI/rooms/bugroom
+add screen_size stuff in logon and user
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-827090859
+Leto at Sun Mar 17 20:27:39 1996 in /d/TMI/rooms/quad
+fix www tell
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-827092757
+Leto at Sun Mar 17 20:59:17 1996 in /d/TMI/rooms/quad
+int help to string help
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831332289
+Brainstorm at Sun May  5 22:38:09 1996 in /d/TMI/rooms/bugroom
+fix _find.c 
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831498535
+->Brainstorm at Mon May  6 10:24:51 1996 in /d/TMI/rooms/quad
+fix finger @mud, to at least say something or wrap it to
+who @mud
+
+COMMENT:
+now does a who @mud
+-Brainstorm Tue May  7 20:48:55 1996
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831503946
+->Brainstorm at Tue May  7 11:34:08 1996 in /d/TMI/rooms/quad
+I3: - try figuring out how to delete bogus channels
+    - initalize i3 channels on I3 Daemon update in CHANNELS_D
+
+COMMENT:
+okay did that - dont know though if thats compliant with future
+router software changes
+-Brainstorm Tue May  7 22:19:06 1996
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831717794
+Leto at Fri May 10 09:43:14 1996 in /d/TMI/rooms/quad
+Fix up /cmds/file. Most suck (no multiple args, no relative dirs
+etc )
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-831810753
+Leto at Sat May 11 11:32:33 1996 in /d/TMI/rooms/quad
+more the output of the scanner to the player instead of dumping all
+

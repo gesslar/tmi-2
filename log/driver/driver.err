@@ -1,0 +1,126 @@
+using config file: config.tmi2
+----------------------------------------------------------------------------
+Team-Aye (MudOS v21.7a10) starting up on Linux - Thu May  9 09:57:45 1996
+
+
+Connection to address server (localhost 6364) refused.
+]Parse error in group: root
+User armando not found.
+Continuing parse.
+]Parse error in group: root
+User blue not found.
+Continuing parse.
+]Parse error in group: admin
+User lucas not found.
+Continuing parse.
+]Parse error in group: admin
+User brainstorm not found.
+Continuing parse.
+]Parse error in group: admin
+User deathknight not found.
+Continuing parse.
+]Parse error in group: admin
+User armando not found.
+Continuing parse.
+]Parse error in group: admin
+User dalto not found.
+Continuing parse.
+]Parse error in group: admin
+User rust not found.
+Continuing parse.
+]Parse error in group: admin
+User dm not found.
+Continuing parse.
+]Parse error in group: admin
+User drizzt not found.
+Continuing parse.
+]Parse error in group: backbone
+User Backbone not found.
+Continuing parse.
+]Parse error in group: news
+User News not found.
+Continuing parse.
+
+Loading preloaded files ...
+]Preloading : /adm/daemons/emoted...]
+]Preloading : /adm/daemons/event...]
+]Preloading : /adm/daemons/logind...]
+]Preloading : /adm/daemons/usage_d...]
+]Preloading : /adm/daemons/weather_d.c...]
+]Preloading : /adm/daemons/channels...]
+]Preloading : /adm/obj/mail_purger...]
+Initializations complete.
+
+Accepting connections on port 5555.
+System Error: flush_message: write:Connection timed out
+Broken connection during add_message.
+]ÿý]
+Welcome to...
+
+   - The TMI-2 Mudlib Release, version 1.3 -
+ 
+   This is the welcome screen (/adm/news/welcome) and is displayed to
+   all users as they first login. It is followed by the username and
+   password request. 
+
+Team-Aye is running the TMI-2 1.3 mudlib on MudOS v21.7a10
+
+]Current users: Brainstorm, and Leto.
+
+]By what name do you wish to be known? ]Global Dest: Permission denied.
+get_user_data: read on fd 12
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 7
+System Error: get_user_data: read:Bad file number
+object /u/c/ciao/obj/wand_of_loading#106: eval_cost too big 500000
+object /u/c/ciao/obj/wand_of_loading#106: eval_cost too big 500000
+object /d/Fooland/hall2: eval_cost too big 500000
+object /u/c/ciao/obj/wand_of_loading#106: eval_cost too big 500000
+object /u/c/ciao/obj/wand_of_loading#106: eval_cost too big 500000
+object /cmds/file/_diff: eval_cost too big 500000
+object /cmds/file/_diff: eval_cost too big 500000
+]Global Dest: Permission denied.
+get_user_data: read on fd 12
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 12
+System Error: get_user_data: read:Bad file number
+]Global Dest: Permission denied.
+get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 8
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 11
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+SIGPIPE received.
+System Error: flush_message: write:Broken pipe
+Broken connection during add_message.
+]ÿý]
+Welcome to...
+
+   - The TMI-2 Mudlib Release, version 1.3 -
+ 
+   This is the welcome screen (/adm/news/welcome) and is displayed to
+   all users as they first login. It is followed by the username and
+   password request. 
+
+Team-Aye is running the TMI-2 1.3 mudlib on MudOS v21.7a10
+
+]Current users: Leto, Skylight, and Hanzou.
+
+]By what name do you wish to be known? get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 12
+System Error: get_user_data: read:Bad file number
+get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+]Global Dest: Permission denied.
+get_user_data: read on fd 10
+System Error: get_user_data: read:Bad file number
+]Global Dest: Permission denied.
+object /cmds/file/_diff: eval_cost too big 500000
+object /cmds/file/_diff: eval_cost too big 500000
+]Global Dest: Permission denied.

@@ -1,0 +1,60 @@
+using config file: config.tmi2
+----------------------------------------------------------------------------
+Team-Aye (MudOS v21.7a10) starting up on Linux - Thu May  9 09:37:59 1996
+
+
+Connection to address server (localhost 6364) refused.
+]Parse error in group: root
+User armando not found.
+Continuing parse.
+]Parse error in group: root
+User blue not found.
+Continuing parse.
+]Parse error in group: admin
+User lucas not found.
+Continuing parse.
+]Parse error in group: admin
+User brainstorm not found.
+Continuing parse.
+]Parse error in group: admin
+User deathknight not found.
+Continuing parse.
+]Parse error in group: admin
+User armando not found.
+Continuing parse.
+]Parse error in group: admin
+User dalto not found.
+Continuing parse.
+]Parse error in group: admin
+User rust not found.
+Continuing parse.
+]Parse error in group: admin
+User dm not found.
+Continuing parse.
+]Parse error in group: admin
+User drizzt not found.
+Continuing parse.
+]Parse error in group: admin
+User leto not found.
+Continuing parse.
+]Parse error in group: backbone
+User Backbone not found.
+Continuing parse.
+]Parse error in group: news
+User News not found.
+Continuing parse.
+
+Loading preloaded files ...
+]Preloading : /adm/daemons/emoted...]
+]Preloading : /adm/daemons/event...]
+]Preloading : /adm/daemons/logind...]
+]Preloading : /adm/daemons/usage_d...]
+]Preloading : /adm/daemons/weather_d.c...]
+]Preloading : /adm/daemons/channels...]
+]Preloading : /adm/obj/mail_purger...]
+Initializations complete.
+
+Accepting connections on port 5555.
+******** FATAL ERROR: Process terminated
+MudOS driver attempting to exit gracefully.
+closed external ports

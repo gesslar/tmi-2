@@ -1,0 +1,11 @@
+831498743
+->Slc at Mon May  6 00:35:14 1996 in /d/TMI/rooms/quad
+In /adm/daemons/network/I3/finger.c
+you should rather use format "%d" than "%s" for the idle time "info[11]/60"!
+I suppose, this is a TYPO, not a real bug...
+Slc@SILKE
+
+COMMENT:
+fixed that also - I would call it a bug though ;)
+-Brainstorm Tue May  7 20:52:23 1996
+
