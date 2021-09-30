@@ -926,7 +926,7 @@ varargs int quit(string str) {
  * This function determines if the user has anything droppable
  * when they quit the mud.
  */
-protect int inventory_check(object obj) {
+protected int inventory_check(object obj) {
     if (obj->query_auto_load())  return 0;
     if (!obj->query("short") || obj->query("prevent_drop"))  return 0;
     return 1;
