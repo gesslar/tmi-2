@@ -306,7 +306,7 @@ log_http(int fd, int rc, int nbytes, string cmd)
 void do_get(int, string, string);
 void do_post(int, string, string, string);
 
-protected4 void read_callback(int fd, string str)
+protected void read_callback(int fd, string str)
 {
 	string cmd, args, file, url;
 	string *request;
@@ -388,7 +388,7 @@ void resolve_callback(string theName, string theAddr, int slot)
 	}
 }
 
-protected private void http_error(int fd, mapping err, string code)
+private void http_error(int fd, mapping err, string code)
 {
 	string tens;
 
@@ -412,7 +412,7 @@ protected void close_connection(int fd)
 // respond to a client request for a file.
 //
     
-protected private void do_get(int fd, string file, string line0)
+private void do_get(int fd, string file, string line0)
 {
 	string dir;
 	string *parts;
@@ -497,7 +497,7 @@ protected private void do_get(int fd, string file, string line0)
 	write_data(fd, result);
 }
 
-protected private void do_post(int fd, string file, string url, string line0)
+private void do_post(int fd, string file, string url, string line0)
 {
 	do_get(fd, file + "?" + url, line0);
 }

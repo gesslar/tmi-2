@@ -37,7 +37,7 @@ mixed *query_debugging(){
     return ({ debugger, debug_level });
 }
  
-protected private void debug_stuff(mixed message){
+private void debug_stuff(mixed message){
 
   if(debugger)
     message("I3",sprintf("%c[1;32m[I3]: %O%c[0m\n", 27, message, 27), debugger);    
@@ -117,7 +117,7 @@ int send_packet(string type, string user, string mud, string target, mixed *data
     return 1;
 }    
  
-protected private int send_chanlist_req(){
+private int send_chanlist_req(){
     send_packet(PRT_CHANLIST_REQ, 0, ROUTER_NAME, 0, ({ chanlist_id }) );
 }    
 
@@ -161,7 +161,7 @@ void process_chanlist_reply(mixed *info){
     save_object(I3_SAVE_FILE);
 }    
     
-protected private int send_startup_req_1() {
+private int send_startup_req_1() {
     mixed *packet;
  
     packet = ({ (router_password || 0), 

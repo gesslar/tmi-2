@@ -88,7 +88,7 @@ void basic_commands() {
     add_action("quit", "quit");
 }
 
-protect void init_commands() {
+protected void init_commands() {
     string path;
 
     add_action( "cmd_hook", "", 1 );
