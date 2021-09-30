@@ -14,10 +14,10 @@ inherit DAEMON ;
  
 #define SYNTAX	"Syntax: chsh [shell | ?]\n"
  
-static string get_shell();
-static int input_shell(string str);
-static int list_shells();
-static int load_shells();
+protected string get_shell();
+protected int input_shell(string str);
+protected int list_shells();
+protected int load_shells();
  
 string *SHELLS;
  
@@ -35,7 +35,7 @@ int cmd_chsh(string str) {
  
 return 1; }
  
-static int input_shell(string str) {
+protected int input_shell(string str) {
    object shell;
    string old_shell;
    int loop;
@@ -72,7 +72,7 @@ static int input_shell(string str) {
  
 return 1; }
  
-static string get_shell() {
+protected string get_shell() {
    string tmp;
  
    tmp = (string)this_player()->query("shell");
@@ -80,7 +80,7 @@ static string get_shell() {
  
 return tmp;  }
  
-static int load_shells() {
+protected int load_shells() {
    string list;
    int loop;
 
@@ -95,7 +95,7 @@ static int load_shells() {
 
 return 1; }
  
-static int list_shells() {
+protected int list_shells() {
    int loop;
  
    write("Available shell environments:\t");

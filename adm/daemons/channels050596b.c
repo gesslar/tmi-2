@@ -46,7 +46,7 @@ tell_user(object user, string mesg)
 
 #define NO_NEW_CHANNELS
 
-static varargs int
+protected varargs int
 create_channel(string chan)
 {
     if (channels[chan])
@@ -60,7 +60,7 @@ create_channel(string chan)
 }
 
 
-static int
+protected int
 kill_user(object user, string chan)
 {
     if (undefinedp(channels[chan]))
@@ -72,7 +72,7 @@ kill_user(object user, string chan)
 }
 
 
-static varargs int
+protected varargs int
 delete_channel(string chan)
 {
     if (undefinedp(channels[chan]))
@@ -84,7 +84,7 @@ delete_channel(string chan)
 }
 
 
-static varargs int
+protected varargs int
 add_user(string chan, object user)
 {
     string *toggle_list,priv;
@@ -120,7 +120,7 @@ add_user(string chan, object user)
 }
 
 
-static int
+protected int
 kill_users(mixed chan)
 {
     int i;
@@ -334,7 +334,7 @@ varargs mixed display_channel(string chan, object viewer) {
 }
 
 
-static int scan_config() {
+protected int scan_config() {
     string *list, *split_line, line;
     int i, j;
 

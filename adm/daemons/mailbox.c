@@ -19,8 +19,8 @@
  
 // The following are the variables that will be saved as the datafiles
 mapping         *mailbox, my_groups;
-static  string  file, *dir_list;
-static  int     maxmsg, dir_idx;
+nosave  string  file, *dir_list;
+nosave  int     maxmsg, dir_idx;
  
  
 int
@@ -370,7 +370,7 @@ int not_saved( string name ) {
   return 0;
 }
  
-static void
+protected void
 remove_box( string owner ) {
    int i;
  

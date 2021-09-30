@@ -14,7 +14,7 @@ inherit "std/priv";
 #endif /* SECURE */
 
 mapping ob_data; // obscure name so it won't break code
-static mapping tmp_ob_data; //	Temporary flag attrib mapping
+nosave mapping tmp_ob_data; //	Temporary flag attrib mapping
 
 #include <uid.h>
 #include "/std/object/prop_logic.c"

@@ -6,7 +6,7 @@
 // Changed ob to ({ob})  Leto, 11-94
 // And thus i think i fixed it....maybe ?
 
-static mapping contents;
+nosave mapping contents;
 
 
 int receive_object(object ob) {

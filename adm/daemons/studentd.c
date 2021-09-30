@@ -198,7 +198,7 @@ string *query_overdue() {
 
 return who; }
  
-static int filter_overdue(string name) {
+protected int filter_overdue(string name) {
    return (students[name] + STUDENT_TIME_PERIOD > time());  
 }
  

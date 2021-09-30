@@ -67,33 +67,33 @@ inherit OBJECT ;
  
 //	Function prototypes
  
-static string define_user_path();
-static string query_socket_error(int err);
-static int restore_array(string array);
-static int add_buffer(string mesg);
-static int display_alarms();
-static void init_divider();
-static set_main_window();
-static int send_mesg(string str, int win);
-static int file_completion(string str);
-static new_window_size(string size);
-static int shell_help(string str);
-static int setup_screen();
-static int stop_shell();
-static int mark_text(string str);
-static int unmark_text(string str);
-static int display_assign();
-static int display_text_list(string str);
-static int save_rcfile();
-static mixed *process_choice(string str);
-static mixed *process_users();
-static string comm_catch(string mess);
-static int conduct_history(int num);
+protected string define_user_path();
+protected string query_socket_error(int err);
+protected int restore_array(string array);
+protected int add_buffer(string mesg);
+protected int display_alarms();
+protected void init_divider();
+protected set_main_window();
+protected int send_mesg(string str, int win);
+protected int file_completion(string str);
+protected new_window_size(string size);
+protected int shell_help(string str);
+protected int setup_screen();
+protected int stop_shell();
+protected int mark_text(string str);
+protected int unmark_text(string str);
+protected int display_assign();
+protected int display_text_list(string str);
+protected int save_rcfile();
+protected mixed *process_choice(string str);
+protected mixed *process_users();
+protected string comm_catch(string mess);
+protected int conduct_history(int num);
 nomask int socket_permission();
 string save_array();
 string process_dir(string str);
-static int vis_ck();
-static int busy_ck();
+protected int vis_ck();
+protected int busy_ck();
  
 //	Global shell variables - Saved in RCFILE file
  
@@ -101,12 +101,12 @@ mixed *window, *GAG, *HILITE, *ASSIGN, *ALARM, *PAGE;
 string *cursor, *divider, *hilight, *snoop, *buff;
 int MAX, time_mod, rcflag, fcflag, crflag;
  
-//	Static global shell variables - Not retained in save file
+//	Nosave global shell variables - Not retained in save file
  
-static object old_room;
-static mixed *sweep, *socket, *buff_pos;
-static string prompt, time, dir, *BUFFER, *TMP_BUFFER;
-static int Status, scheck, vis, busy, NOT_ANSI_HOME, help;
+nosave object old_room;
+nosave mixed *sweep, *socket, *buff_pos;
+nosave string prompt, time, dir, *BUFFER, *TMP_BUFFER;
+nosave int Status, scheck, vis, busy, NOT_ANSI_HOME, help;
  
 create() {
  
@@ -171,7 +171,7 @@ string query_auto_load() {
  
 return par1 + ":" + NOT_ANSI_HOME + "||" + save_array(); }
  
-static int save_rcfile() {
+protected int save_rcfile() {
    string where;
  
    if(WHOM && rcflag && (where = define_user_path()) != "") {
@@ -194,7 +194,7 @@ int clean_up() {  return 1;  }		// Prevent inadvertant clean_up
  
 //	Locate the user's RCFILE save directory
  
-static string get_home_path() {
+protected string get_home_path() {
    string name;
  
    name = (string) WHOM->query("name");
@@ -203,7 +203,7 @@ return "/u/" + extract(name,0,0) + "/" + name + "/"; }
  
 //	Locate path to user's ssrc save file
  
-static string define_user_path() {
+protected string define_user_path() {
  
    if(file_size(get_home_path()) != -2) {
    tell_object(WHOM,"\nShsh: Error in locating user home directory.\n       "+
@@ -215,7 +215,7 @@ return get_home_path() + RCFILE; }
  
 //	Restore saved shell attributes
  
-static int restore_attr_file() {
+protected int restore_attr_file() {
    string where;
  
    where = get_home_path();
@@ -238,7 +238,7 @@ return array; }
  
 /*** Converts loaded strings back into numeric array ***/
  
-static int restore_array(string array) {
+protected int restore_array(string array) {
    int number;
  
    window = ({ });
@@ -313,7 +313,7 @@ int query_status() { return Status; }
  
 //	Function used by status window for maintaining status display
  
-static int status_check() {
+protected int status_check() {
    int scheck;
  
    if(vis_ck() != vis) { vis = vis_ck(); scheck = 1; }
@@ -323,37 +323,37 @@ return scheck; }
  
 /** Status Function checks **/
  
-static vis_ck() { return (int)WHOM->query("invisible");  }
-static busy_ck() { return (int)WHOM->query("busy");  }
+protected vis_ck() { return (int)WHOM->query("invisible");  }
+protected busy_ck() { return (int)WHOM->query("busy");  }
  
  
 /**
  **	ANSI Function/Window Library processing calls
  **/
  
-static void Talk(string str) {  tell_object(WHOM, str);  }
+protected void Talk(string str) {  tell_object(WHOM, str);  }
  
-static void clear_window(int top, int bottom) {
+protected void clear_window(int top, int bottom) {
    Talk(CSI + top + "H" + CSI + (bottom - top) + "M"); }
  
-static void win_size(int top, int bottom) {  Talk(CSI+top+";"+bottom+"r"); }
+protected void win_size(int top, int bottom) {  Talk(CSI+top+";"+bottom+"r"); }
  
-static void save_position() { Talk(ESC+"7"); } 
+protected void save_position() { Talk(ESC+"7"); } 
  
-static void restore_position() { Talk(ESC+"8"); }
+protected void restore_position() { Talk(ESC+"8"); }
  
-static void new_pos(int pos) { Talk(CSI+pos+"H"); }
+protected void new_pos(int pos) { Talk(CSI+pos+"H"); }
  
-static string invert(string mess) {
+protected string invert(string mess) {
    if(hilight[1] != "-")				// Add colour
 	return (CSI + "7m" + CSI + hilight[1] + "m" + mess + CSI + "0m" +
 		(cursor[1] != "-" ? CSI + cursor[1] + "m" : ""));
    else return (CSI + "7m" + mess + CSI + "0m" +
 		(cursor[1] != "-" ? CSI + cursor[1] + "m" : ""));  }
  
-static void erase_line(int pos) { Talk(CSI + pos + "H" + CSI + "2K"); }
+protected void erase_line(int pos) { Talk(CSI + pos + "H" + CSI + "2K"); }
  
-static void form_line(int pos, int wind) {
+protected void form_line(int pos, int wind) {
    save_position();
    new_pos(pos);
  
@@ -378,7 +378,7 @@ static void form_line(int pos, int wind) {
  
 //	Place a description label on window separation divider
  
-static void label_line(string mesg, int win) {
+protected void label_line(string mesg, int win) {
  
    if(!mesg || mesg == "") {
    form_line(window[(NOT_ANSI_HOME*2)+2]-1, NOT_ANSI_HOME);
@@ -400,7 +400,7 @@ static void label_line(string mesg, int win) {
   ***       variable to the new window number
   ***/
  
-static int main_screen() {
+protected int main_screen() {
    string tmp;
    int position;
  
@@ -557,7 +557,7 @@ refresh_status() {
  
 //	Setup outline and preliminary status of status window
  
-static create_status() {
+protected create_status() {
  
    old_room = 0;   vis = -1;
    if(window[1] == MAX)  form_line(MAX - 3, 1);
@@ -583,7 +583,7 @@ return 0; }
  
 //	Draw window divisions and setup initial shell systems
  
-static setup_screen() {
+protected setup_screen() {
  
    if(!window[0] && !window[2] && !window[4]) {
    write("Your shell system has not been configured.\n");
@@ -611,7 +611,7 @@ return 1; }
  
 //   Creates divider lines for each created window
  
-static void init_divider() {
+protected void init_divider() {
    int loop, pos;
  
    if(!window[2]) pos = 6;    else pos = 4;
@@ -624,7 +624,7 @@ static void init_divider() {
   **    Shell System User configuration
   **/
  
-static system_config(string str) {
+protected system_config(string str) {
    notify_fail("Usage: configure shell\n");
  
    if(!id(str)) return 0;
@@ -641,7 +641,7 @@ static system_config(string str) {
  
 return 1; }
  
-static screen_length(string length) {
+protected screen_length(string length) {
    int temp;
  
    if(!length || length == "") {
@@ -664,7 +664,7 @@ static screen_length(string length) {
  
 return 1; }
  
-static change_colour(string str) {
+protected change_colour(string str) {
    string hold;
    int loop;
 
@@ -693,7 +693,7 @@ static change_colour(string str) {
  
 return 1; }
  
-static cursor_colour(string str) {
+protected cursor_colour(string str) {
    int pos;
  
    if(!str || str == "") {
@@ -716,7 +716,7 @@ static cursor_colour(string str) {
  
 return 1; }
  
-static divider_colour(string str) {
+protected divider_colour(string str) {
    int pos;
  
    if(!str || str == "") {
@@ -739,7 +739,7 @@ static divider_colour(string str) {
  
 return 1; }
  
-static snoop_colour(string str) {
+protected snoop_colour(string str) {
    int pos;
  
    if(!str || str == "") {
@@ -762,7 +762,7 @@ static snoop_colour(string str) {
  
 return 1; }
  
-static buffer_colour(string str) {
+protected buffer_colour(string str) {
    int pos;
  
    if(!str || str == "") {
@@ -785,7 +785,7 @@ static buffer_colour(string str) {
  
 return 1; }
  
-static hilight_colour(string str) {
+protected hilight_colour(string str) {
    int pos;
  
    if(!str || str == "") {
@@ -808,7 +808,7 @@ static hilight_colour(string str) {
  
 return 1; }
  
-static status_set(string str) {
+protected status_set(string str) {
  
    if(str == "yes" || str == "y") {
    window[0] = 1;  window[1] = 3; }
@@ -826,7 +826,7 @@ static status_set(string str) {
  
 return 1; }
  
-static comm_set(string str) {
+protected comm_set(string str) {
  
    if(str == "yes" || str == "y") {
    write("\n  Communication window size [Default 5] : ");
@@ -849,7 +849,7 @@ static comm_set(string str) {
  
 return 1; }
  
-static set_comm_size(string size) {
+protected set_comm_size(string size) {
    int temp;
  
    if(!size || size == "") {
@@ -879,7 +879,7 @@ static set_comm_size(string size) {
  
 return 1; }
  
-static rcfile_choice(string str) {
+protected rcfile_choice(string str) {
    string where;
  
    if(str!="" && !(member_array(lower_case(str),({"yes","y","no","n"}))+1)) {
@@ -903,7 +903,7 @@ static rcfile_choice(string str) {
  
 return 1; }
  
-static set_main_window() {
+protected set_main_window() {
  
    if(!window[0] && !window[2]) {
    window[4] = 1;  window[5] = MAX;
@@ -921,7 +921,7 @@ return 1; }
  
 //	Modify time display according to user's timezone position
  
-static int change_time() {
+protected int change_time() {
 
    write("Present Mud time\t:  " + extract(ctime(time()), 4, 15) + "\n" +
 	 "Present Shell time\t:  " + TIME + "\n\n" +
@@ -930,7 +930,7 @@ static int change_time() {
  
 return 1; }
  
-static int modify_time(string str) {
+protected int modify_time(string str) {
    int num;
 
    if(!str || str == "") {
@@ -951,7 +951,7 @@ return 1; }
  
 //	Terminate and clear shell screen system
  
-static stop_shell() {
+protected stop_shell() {
    int loop;
  
    remove_call_out("refresh_status");
@@ -1036,7 +1036,7 @@ return 1; }
  
 //	Command used to add an additional window to active set
  
-static add_window(string str) {
+protected add_window(string str) {
    int num;
  
    notify_fail("Usage: add window\n");
@@ -1053,7 +1053,7 @@ static add_window(string str) {
  
 return 1; }
  
-static new_window_size(string size) {
+protected new_window_size(string size) {
    int temp, last;
  
    if(!size || size == "") {
@@ -1082,7 +1082,7 @@ static new_window_size(string size) {
  
 return 1; }
  
-static refresh_shell(string str) {
+protected refresh_shell(string str) {
  
    notify_fail("Usage: refresh shell\n");
    if(!id(str)) return 0;
@@ -1096,7 +1096,7 @@ static refresh_shell(string str) {
  
 return setup_screen(); }
  
-static rem_window(string str) {
+protected rem_window(string str) {
    int last, pos;
  
    notify_fail("Usage: remove window\n");
@@ -1139,7 +1139,7 @@ return 1; }
  **	Send a beep signal to another player
  **/
  
-static beep_other(string str) {
+protected beep_other(string str) {
    object target;
  
    notify_fail("Usage: " + query_verb() + " [player]\n");
@@ -1215,7 +1215,7 @@ int player_quit() {
    if(Status)  stop_shell();
 return 0; }
  
-static change_window(string str) {
+protected change_window(string str) {
    notify_fail("Usage: change window\n");
    if(str != "window") return 0;
  
@@ -1254,7 +1254,7 @@ return 1; }
 //	Check incoming communication for gag/hilite/etc content
 //	and manipulate as required
  
-static string comm_catch(string mess) {
+protected string comm_catch(string mess) {
    string tmp1, tmp2;
    int loop;
  
@@ -1272,7 +1272,7 @@ static string comm_catch(string mess) {
  
 return mess; }
  
-static int mark_text(string str) {
+protected int mark_text(string str) {
    mixed *tmp;
    string verb;
    int loop;
@@ -1306,7 +1306,7 @@ static int mark_text(string str) {
  
 return 1; }
  
-static int unmark_text(string str) {
+protected int unmark_text(string str) {
    mixed *fill;
    string verb;
    int tmp;
@@ -1347,7 +1347,7 @@ static int unmark_text(string str) {
  
 return 0; }
  
-static int display_text_list(string str) {
+protected int display_text_list(string str) {
    mixed *tmp;
    int loop;
  
@@ -1380,7 +1380,7 @@ return 1; }
  
 //	Assign rerouting message functions
  
-static int display_assign() {
+protected int display_assign() {
    int loop;
 
    if(!ASSIGN[0] || ASSIGN[0] ==({ })) {
@@ -1401,7 +1401,7 @@ static int display_assign() {
  
 return 1; }
  
-static int assign_comm(string str) {
+protected int assign_comm(string str) {
    string Class;
    int where, num;
 
@@ -1445,7 +1445,7 @@ static int assign_comm(string str) {
 
 return 1; }
  
-static int unassign_comm(string str) {
+protected int unassign_comm(string str) {
    int num;
 
    notify_fail("Usage: " + query_verb() + " [communication Class]\n");
@@ -1467,7 +1467,7 @@ return 1; }
  
 //	Shell status output display
  
-static int shell_status() {
+protected int shell_status() {
  
    write("\nShadow Shell Status\n===================\n");
  
@@ -1529,7 +1529,7 @@ return 0; }
 //	Conduct action history request...
 //	The shell accesses the player's history list via tsh
  
-static int conduct_history(int num) {
+protected int conduct_history(int num) {
    string *tmp, what;
  
    if(num && stringp(num))  sscanf(num, "%d", num);
@@ -1550,7 +1550,7 @@ return 1; }
 //	If the last character in the file path is a *, then the
 //	shell will try to complete the path as best it can.
  
-static int file_completion(string str) {
+protected int file_completion(string str) {
    mixed *tmp, *result;
    string command;
  
@@ -1584,7 +1584,7 @@ return 1; }
 //	The function does the directory searches in an attempt
 //	to complete the requested command's file path.
  
-static mixed *process_choice(string str) {
+protected mixed *process_choice(string str) {
    mixed *dir, *tmp, *hold;
    string file, where, patt, dump;
    int loop;
@@ -1614,7 +1614,7 @@ static mixed *process_choice(string str) {
  
 return hold; }
  
-static int completion_mode(string str) {
+protected int completion_mode(string str) {
  
    if(fcflag)
    notify_fail("Shell file completion is presently active.\n" +
@@ -1644,7 +1644,7 @@ return 1; }
  ***	Alarm processing subroutines
  ***/
  
-static mixed *process_alarm_calls() {
+protected mixed *process_alarm_calls() {
    mixed *calls;
    int loop;
  
@@ -1658,7 +1658,7 @@ static mixed *process_alarm_calls() {
  
 return calls; }
  
-static int display_alarms() {
+protected int display_alarms() {
    mixed *calls;
    int loop, remainder;
  
@@ -1677,7 +1677,7 @@ static int display_alarms() {
 
 return 1; }
  
-static int add_alarm(string str) {
+protected int add_alarm(string str) {
    string mesg;
    int num;
  
@@ -1706,7 +1706,7 @@ static int add_alarm(string str) {
  
 return 1; }
  
-static int rem_alarm(string str) {
+protected int rem_alarm(string str) {
    mixed *calls;
    int num, loop;
  
@@ -1734,14 +1734,14 @@ return 1; }
  
 //  Give the beep on the alarm call
  
-static int call_alarm() {
+protected int call_alarm() {
    int loop;
  
    for(loop=0; loop<40; loop++)	 tell_object(WHOM, BEEP);
 
 return 1; }
  
-static void initiate_alarm() {
+protected void initiate_alarm() {
 
    tell_object(WHOM,"Alarm: " + ALARM[0] + "\n");
    call_alarm();
@@ -1880,7 +1880,7 @@ return 1; }
  
 //	Catch all outgoing commands in socket window
  
-static int socket_catch(string str) {
+protected int socket_catch(string str) {
    string tmp;
    int num;
 
@@ -1913,7 +1913,7 @@ return 1; }
  
 //	Send a specific action to a specified window
  
-static int send_mesg(string str, int win) {
+protected int send_mesg(string str, int win) {
   int ret, pos;
  
    if(win)  pos = member_array(win, socket[1]);
@@ -1967,7 +1967,7 @@ mixed *query_socket() {  return socket;  }
 //   This function returns a string description of
 //   socket error returned by the driver
  
-static string query_socket_error(int err) {
+protected string query_socket_error(int err) {
  
    //	These errors are designated in /include/socket_errors.h
  
@@ -2011,7 +2011,7 @@ return ("Socket error #" + err); }
  
 //	Shell's message storage buffer system functions
  
-static int add_buffer(string mesg) {
+protected int add_buffer(string mesg) {
    string *tmp;
    int loop;
 
@@ -2037,14 +2037,14 @@ return 1;  }
 //	Outputs buffer to screen in colour or non-colour
 //	depending on user's setting.
  
-static int print_buffer(string str) {
+protected int print_buffer(string str) {
 
    if(buff[0] == "default")  write(str + CSI + "10Z");
    else write(CSI + buff[1] + "m" + str + CSI + "0m" + CSI + "10Z");
  
 return 1; }
  
-static int open_buffer() {
+protected int open_buffer() {
    int loop, win_size, base;
  
    if(!Status) {
@@ -2085,7 +2085,7 @@ static int open_buffer() {
  
 return 1; }
  
-static int process_buffer(string str) {
+protected int process_buffer(string str) {
 
    if(str == "q" || str == "Q" || str == ESC) {
    label_line(0, NOT_ANSI_HOME);

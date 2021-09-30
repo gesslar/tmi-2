@@ -104,10 +104,10 @@ inherit OBJECT;
 mapping		*messages;
 int		id_ref;
 
-static string	attic_dir, save_dir;
-static mapping	title;
-static string	file, location, maker, board_set, second_arg;
-static int	num_messages, max_messages, min_messages, carryover;
+nosave string	attic_dir, save_dir;
+nosave mapping	title;
+nosave string	file, location, maker, board_set, second_arg;
+nosave int	num_messages, max_messages, min_messages, carryover;
 
 
 int
@@ -208,7 +208,7 @@ set_max_messages(int num)
     max_messages = num;
 }
 
-private static void
+protected void
 set_maker(string o)
 {
     maker = lower_case(o);
@@ -797,7 +797,7 @@ remove_msg(string str)
 } // remove_msg
 
 
-static int	orig_number;
+nosave int	orig_number;
 
 int
 edit_note(string str)

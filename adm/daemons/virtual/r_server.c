@@ -16,10 +16,10 @@ inherit "/std/virtual/compiler";
 #define ROOM_TEMPLATE "/adm/daemons/virtual/template/room"
 
 /*
- * global statics used as state variables
+ * global nosaves used as state variables
  */
-static string state;
-static string current_item;
+nosave string state;
+nosave string current_item;
 
 string extension() { return ".r"; }
 string default_base_object()

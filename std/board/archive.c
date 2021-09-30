@@ -13,9 +13,9 @@
 
 inherit "/std/board/bboard";
 
-static string *files, curname;
-static int cur_arc;
-static int last_mod;
+nosave string *files, curname;
+nosave int cur_arc;
+nosave int last_mod;
 
 void
 generate_files()

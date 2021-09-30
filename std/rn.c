@@ -24,10 +24,10 @@ private void unsubscribe(string);
 private void show_headers();
 private void post(string, function);
 
-static void ask_what_next(string);
-static void ask_about_group(string);
+protected void ask_what_next(string);
+protected void ask_about_group(string);
 // Mobydick added the next one
-static void do_done() ;
+protected void do_done() ;
 
 #define STRIP_UNSUB(x) ((x) ? ((x)[0] == '#' ? (x)[1..strlen(x)] : x) : 0)
 #define IS_UNSUB(x) ((x) && ((x)[0] == '#'))
@@ -211,7 +211,7 @@ next_group() {
     main_loop();
 }
 
-static void
+protected void
 ask_what_next(string response) {
     int num;
 
@@ -393,7 +393,7 @@ list_groups() {
     }
 }
 
-static void
+protected void
 ask_subscribe(string response, string group) {
     switch (response) {
     case "y":
@@ -425,7 +425,7 @@ goto_group( string group ) {
     }
 }
 
-static void
+protected void
 ask_about_group(string response) {
     switch (response) {     /* break; instead of return; goes to next group */
     case "q": /* quit */
@@ -509,7 +509,7 @@ ENDHELP);
     next_group();
 }
 
-static void
+protected void
 ask_about_new_groups(string response, string *groups_left) {
     int n;
 
@@ -579,7 +579,7 @@ end_post (mixed args) {
     evaluate(when_done);
 }
 
-static void
+protected void
 get_subject(string subj, string group, function when_done) {
     who->edit("/tmp/rn."+who->query("name"), "end_post", this_object(),
 	({ subj, group, when_done })) ;

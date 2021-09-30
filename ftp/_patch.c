@@ -397,7 +397,7 @@ next_hunk( string *diff, mixed *hunk )
 }
 
 
-// Has to be private (or static) because of file_size().
+// Has to be private (or protected) because of file_size().
 // Called by next_patch().
 private string
 make_fname( string file, string path, int strip_path )
@@ -417,7 +417,7 @@ make_fname( string file, string path, int strip_path )
 // Looks for the first diff line and what mode it is.
 // Sets globals: diff_type, diff_line, last_offset, last_frozen_line
 // Returns: file_name or "" if none found. 0 is returned at errors.
-static string
+protected string
 next_patch( string *diff, string file_name, string file_dir )
 {
     int i, guess_type, start_line;

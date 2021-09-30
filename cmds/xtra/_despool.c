@@ -12,11 +12,11 @@
 inherit SECURE_OBJECT;
 
 // A lot of these vars are no longer needed but I haven't cleaned em out yet.
-static int cmsg, maxmsg, start_flag, in_mailer, quitmailflag;
-static string owner, tmpfilename;
-static mapping newmsg;
+nosave int cmsg, maxmsg, start_flag, in_mailer, quitmailflag;
+nosave string owner, tmpfilename;
+nosave mapping newmsg;
 
-static void clean_up_house() ;
+protected void clean_up_house() ;
 
 mapping	my_groups;
 mapping	*mailbox;
@@ -24,10 +24,10 @@ mapping	*mailbox;
 //      "from", "date", "cc", "subject", "message", "flags", "to"
 
 
-static void parse_mailcmd( string cmd );
+protected void parse_mailcmd( string cmd );
 void get_text();
-static void mail( string arg );
-static void write_mail (int arg, string filenm) ;
+protected void mail( string arg );
+protected void write_mail (int arg, string filenm) ;
 
 void create() {
 	seteuid(getuid()) ;
@@ -77,7 +77,7 @@ write (user_mbox_file( owner )+"\n") ;
    return 1 ;
 } // init
 
-static
+protected
 void
 write_mail (int num, string filenm) {
   string tmp_msg, to, cc;
@@ -122,7 +122,7 @@ write_mail (int num, string filenm) {
 
 // Does the job.
 
-static void check_clean(string str) {
+protected void check_clean(string str) {
      if (!str || str[0]!='y') {
 	write ("Aborted.\n") ;
 	return ;
@@ -131,7 +131,7 @@ static void check_clean(string str) {
    owner = "" ;
 }
 
-static void clean_up_house() {
+protected void clean_up_house() {
     string filenm ;
     int i ;
 

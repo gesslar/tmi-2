@@ -118,7 +118,7 @@ if(strsrch(cmd,"$")==-1) cmd = cmd + " $*";
   return 1;
 }
 
-static int sort_keys(string a, string b) {  return strcmp(a, b);  }
+protected int sort_keys(string a, string b) {  return strcmp(a, b);  }
 
 
 string help()

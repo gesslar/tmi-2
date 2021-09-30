@@ -27,10 +27,10 @@ inherit DAEMON ;
 #define MUD_INTRO	NEWS_DIR + "news"
  
 int load_news_list();
-static int sweep_save();
-static string add_message(string file);
-static string make_header(string file, string type, int date);
-static int check_read_num(string file, int view);
+protected int sweep_save();
+protected string add_message(string file);
+protected string make_header(string file, string type, int date);
+protected int check_read_num(string file, int view);
  
 mapping list;
 string *files;
@@ -136,7 +136,7 @@ return output; }
 //	Check to see how many times the news item has been
 //	read by this user and save updated count.
  
-static int check_read_num(string file, int view) {
+protected int check_read_num(string file, int view) {
    mapping store;
  
    store = this_player()->query("news_save");
@@ -156,7 +156,7 @@ return  1; }
  
 //	Check through user's stored files and delete old versions
  
-static int sweep_save() {
+protected int sweep_save() {
    mapping save;
    string *tmp;
    int loop;
@@ -177,12 +177,12 @@ return 1; }
  
 //	Add news file contents to displaying output
  
-static string add_message(string file) {
+protected string add_message(string file) {
    return read_file( NEWS_DIR + file, 3) + "\n";  }
  
 //	Construct title header for news item
  
-static string make_header(string file, string type, int date) {
+protected string make_header(string file, string type, int date) {
    string header;
 
    //	If ansi bolding is enabled, bold the news type
@@ -208,7 +208,7 @@ static string make_header(string file, string type, int date) {
  
 return (header + "\n"); }
  
-static int clean_news_save() {
+protected int clean_news_save() {
    mapping tmp;
  
    tmp = this_player()->query("news_save");

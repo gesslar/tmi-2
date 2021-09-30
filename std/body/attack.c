@@ -41,20 +41,20 @@ inherit SECURE_OBJECT ;
 // Prototypes for things that come in through the body object.
 
 varargs mixed set(string prop, mixed arg, mixed security) ;
-static object *attackers, target, *will_attack; // wombled by buddha
-static int any_attack ;
+nosave object *attackers, target, *will_attack; // wombled by buddha
+nosave int any_attack ;
 mixed link_data(string what);
  
-static string qs ;
-private static int heal_time ;
+nosave string qs ;
+private nosave int heal_time ;
 
 // These variables are used in execute_attack() but are declared here to get
 // around the limit on number of variables declared in the function. Kludge.
 
-static string *vb, *vb2 ;
-static int dmin, dmax, damage ;
-static string weapontype ;
-static int skill_improve_prob ;
+nosave string *vb, *vb2 ;
+nosave int dmin, dmax, damage ;
+nosave string weapontype ;
+nosave int skill_improve_prob ;
 
 void run_away();
 int kill_ob (object victim) ;

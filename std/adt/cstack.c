@@ -3,9 +3,9 @@
     -- by Truilkan@TMI - 92/03/11
 */
 
-private static mixed *queue;
-private static int hptr, tptr, size, primed;
-private static int count;
+private nosave mixed *queue;
+private nosave int hptr, tptr, size, primed;
+private nosave int count;
 
 mixed *query_queue()
 {

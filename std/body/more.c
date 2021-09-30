@@ -14,17 +14,17 @@
 #include <ansi.h>
 
 varargs string *wild_card (string arg, int keepdots);
-static void search_forward (string arg);
-static void search_reverse (string arg);
-static void even_more(string str);
+protected void search_forward (string arg);
+protected void search_reverse (string arg);
+protected void even_more(string str);
 void do_more_file(string file);
 
 #define CHUNK 24
 
-static private object previous;
-static private mixed *files;
-static private string more_file, *lines, last_regexp, chunkstr;
-static private int more_line, from_file, num_lines, direction, chunk;
+private nosave object previous;
+private nosave mixed *files;
+private nosave string more_file, *lines, last_regexp, chunkstr;
+private nosave int more_line, from_file, num_lines, direction, chunk;
 
 
 void
@@ -168,7 +168,7 @@ next_more_file(string arg)
   do_more_file(tmp);
 }
 
-static void 
+protected void 
 even_more(string str) 
 {
   int i;
@@ -322,7 +322,7 @@ even_more(string str)
 }
 
 
-static void
+protected void
   search_forward (string arg)
 {
   string *matches;
@@ -351,7 +351,7 @@ static void
   return;
 }
 
-static void
+protected void
 search_reverse (string arg)
 {
   string *matches;
@@ -379,7 +379,7 @@ search_reverse (string arg)
 }
 
 
-static
+protected
 void
 exec_cmd (string arg)
 {

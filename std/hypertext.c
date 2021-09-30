@@ -23,8 +23,8 @@ inherit OBJECT;
 mapping data;
 mapping options;
 int hypertext_version;
-static string index;
-static string *history;
+nosave string index;
+nosave string *history;
 
 varargs int get_option( string option );
 

@@ -32,8 +32,8 @@ inherit OBJECT ;
 
 string open_long_desc;
 string closed_long_desc;
-private static int possible_to_close;
-private static int is_closed;
+private nosave int possible_to_close;
+private nosave int is_closed;
 
 int receive_objects();
 

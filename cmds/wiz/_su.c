@@ -37,13 +37,13 @@ inherit DAEMON ;
 
 mapping active = ([]);
  
-static int link_monster(string name);
-static int get_password(string pass);
-static void enter_world();
-static int check_password(string pass);
-static void try_again();
-static void switch_player();
-static void complete_entry(string str);
+protected int link_monster(string name);
+protected int get_password(string pass);
+protected void enter_world();
+protected int check_password(string pass);
+protected void try_again();
+protected void switch_player();
+protected void complete_entry(string str);
 
 void create() {
 	seteuid(getuid(this_object()));		//  Set daemons permissions
@@ -144,7 +144,7 @@ int cmd_su(string name) {
  
 return 1; }
  
-static int get_password(string pass) {
+protected int get_password(string pass) {
  
    write("\n");
  
@@ -161,7 +161,7 @@ static int get_password(string pass) {
  
 return 1; }
  
-static int check_password(string pass) {
+protected int check_password(string pass) {
    string password;
  
    //	Get stored character password from connection object
@@ -174,7 +174,7 @@ static int check_password(string pass) {
  
 return 1; }
  
-static void switch_player() {
+protected void switch_player() {
    int volume, capacity;
  
    //	Switch interactive between old and new shells
@@ -195,7 +195,7 @@ static void switch_player() {
  
 }
  
-static void enter_world() {
+protected void enter_world() {
    object *inv;
     string *history;
     int cmd_num, ptr, max;
@@ -261,7 +261,7 @@ static void enter_world() {
 
 return; }
  
-static void complete_entry(string str) {
+protected void complete_entry(string str) {
     string domain;
  
    if(!str || member_array(str, ({ "y", "yes", "n", "no" })) == -1) {
@@ -326,7 +326,7 @@ static void complete_entry(string str) {
  
 //	This function handles the user transfers into monster shells
 
-static int link_monster(string name) {
+protected int link_monster(string name) {
    object ob, old;
    int ret;
  

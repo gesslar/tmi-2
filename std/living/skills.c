@@ -12,7 +12,7 @@
 private mapping skills;
 private mapping skill_points ;
 private mapping skill_stats ;
-private static mapping tmp_skills;
+private nosave mapping tmp_skills;
 
 // This function is a basic one to call when in doubt about whether
 // there are any skill values or not.
@@ -114,7 +114,7 @@ varargs void modify_skill(string what, int val, int time) {
 	return;
 }
 
-static void remove_bonus(string what, int val) {
+protected void remove_bonus(string what, int val) {
 	if (tmp_skills && tmp_skills[what]) tmp_skills[what] -= val;
 }
 		

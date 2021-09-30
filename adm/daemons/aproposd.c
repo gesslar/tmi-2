@@ -23,7 +23,7 @@
 // subdirectory
 mapping apropos_phrases;
 
-static int already_updating;
+nosave int already_updating;
 
 // prototypes for local functions
 void scan_file(string x, string y);

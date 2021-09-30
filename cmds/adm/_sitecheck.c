@@ -21,8 +21,8 @@
 
 inherit DAEMON;
 
-static int destruct_flag, test_flag, wildcard_flag;
-static string site, site_num;
+nosave int destruct_flag, test_flag, wildcard_flag;
+nosave string site, site_num;
 
 #define SYNTAX "Syntax: sitecheck [-dtw] site [sites...]\n"
 
@@ -86,7 +86,7 @@ int dot_match(string *site, string *pattern, int flag) {
     return 1;
 }
 
-static int exit(int ok) {
+protected int exit(int ok) {
     if (test_flag) {
         write(sprintf("Site check test %s: %s %s\n",
             ok ? "passed" : "failed",

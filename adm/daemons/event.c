@@ -28,18 +28,18 @@ inherit DAEMON ;
 #define WEEK_DIFF	(7 * DAY_DIFF)		// Seconds in a week
 #define SETUP_ARRAY	({ })			// Base storage array
  
-static void load_events();
-static void save_events();
-static void ERROR(string mesg, string err);
-static void check_once();
-static void check_hourly();
-static void check_daily();
-static void check_weekly();
-static void perform_event(string access, string file, string func, string arg);
-static int sort_stack(mixed *event1, mixed *event2);
+protected void load_events();
+protected void save_events();
+protected void ERROR(string mesg, string err);
+protected void check_once();
+protected void check_hourly();
+protected void check_daily();
+protected void check_weekly();
+protected void perform_event(string access, string file, string func, string arg);
+protected int sort_stack(mixed *event1, mixed *event2);
  int add_event(string type, mixed *event);
  int remove_event(string type, mixed *event);
-static int initiate_sweep();
+protected int initiate_sweep();
 mixed *query_stack(string type);
  
 mixed *HOURLY, *DAILY, *WEEKLY, *ONCE;
@@ -61,7 +61,7 @@ create() {
  
 // Load preset event stacks from save file
  
-static void load_events() {
+protected void load_events() {
    string err;
  
    err = catch( restore_object(SAVE_FILE) );
@@ -72,7 +72,7 @@ static void load_events() {
  
 // Save present event stacks into save file
  
-static void save_events() {
+protected void save_events() {
    string err;
  
    err = catch ( save_object(SAVE_FILE) );
@@ -83,7 +83,7 @@ static void save_events() {
  
 // Stack accessing error output to error file with time stamp
  
-static void ERROR(string mesg, string err) {
+protected void ERROR(string mesg, string err) {
  
    write_file(EVENT_LOG, mesg + "\t[" + extract(ctime(time()),4,15) + "]\n");
    
@@ -96,7 +96,7 @@ return;  }
  
 // Cycling stack check function at INTERVAL intervals
  
-static int initiate_sweep() {
+protected int initiate_sweep() {
 
    remove_call_out("initiate_sweep");
    call_out("initiate_sweep", INTERVAL);	// Set next time check
@@ -110,7 +110,7 @@ return 1;  }
  
 //  Event stack processing functions - Called by initiate_sweep()
  
-static void check_daily() {
+protected void check_daily() {
    mixed *tmp;
    int loop;
  
@@ -137,7 +137,7 @@ if(!add_event("daily", ({ tmp[0]+DAY_DIFF, tmp[1], tmp[2], tmp[3], tmp[4] }) )) 
  
 return ; }
  
-static void check_hourly() {
+protected void check_hourly() {
    mixed *tmp;
    int loop;
  
@@ -163,7 +163,7 @@ catch(add_event("hourly", ({tmp[0]+HOUR_DIFF, tmp[1], tmp[2], tmp[3], tmp[4]})))
  
 return ; }
  
-static void check_weekly() {
+protected void check_weekly() {
    mixed *tmp;
    int loop;
  
@@ -190,7 +190,7 @@ if(!add_event("weekly", ({ tmp[0]+WEEK_DIFF, tmp[1], tmp[2], tmp[3], tmp[4] })))
  
 return ; }
  
-static void check_once() {
+protected void check_once() {
    int loop;
  
    if(ONCE == SETUP_ARRAY)  return ;		// No events stored
@@ -215,7 +215,7 @@ return ; }
  
 // Perform preset event on remote object
  
-static void perform_event(string access, string file, string func, string arg) {
+protected void perform_event(string access, string file, string func, string arg) {
    object what;
    string permis, err;
  
@@ -294,7 +294,7 @@ return 1; }
  
 //  Event stack sorting routine 
  
-static int sort_stack(mixed *event1, mixed *event2) {
+protected int sort_stack(mixed *event1, mixed *event2) {
   return ( event1[0] - event2[0] );  }
  
  

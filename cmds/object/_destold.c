@@ -15,7 +15,7 @@ inherit DAEMON;
 
 #define GUEST_NO_DEST 1
 
-static int cnt;
+nosave int cnt;
 
 int strncmp(string str, string sub, int i) {
     int j;

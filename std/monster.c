@@ -29,7 +29,7 @@
 
 inherit LIVING ;
 object tmp ;
-static int speed, hb_status;
+nosave int speed, hb_status;
  
 int environment_check();
 void spell_cast (string spell, int chance) ;
@@ -38,8 +38,8 @@ void monster_chat();
 void unwield_weapon(object weapon) ;
 void unequip_armor(object armor) ;
 varargs private void execute_attack(int hit_mod, int dam_mod) ;
-static int create_ghost();
-static void die();
+protected int create_ghost();
+protected void die();
  
 mapping alias ;
  
@@ -49,7 +49,7 @@ void basic_commands() {
    add_action("quit", "quit");
 }
 
-static void init_commands() {
+protected void init_commands() {
    string path;
 
    add_action( "cmd_hook", "", 1 );
@@ -86,7 +86,7 @@ string process_input (string arg) {
 //   Setup standard user command hook system.  This system interfaces
 //   with the cmd bin system, the environment's exits, and feeling entries.
 
-nomask static int cmd_hook(string cmd) {
+nomask protected int cmd_hook(string cmd) {
    string file;
    string verb;
 
@@ -241,7 +241,7 @@ void continue_attack() {
 // This is the big, ugly CPU hogging function where the combat actually
 // takes place.
  
-static int noise, loop;
+nosave int noise, loop;
 
 varargs void execute_attack (int hit_mod, int dam_mod) {
 
@@ -690,7 +690,7 @@ void set_name (string str) {
 	set_living_name(str) ;
 }
  
-static void die() {
+protected void die() {
    object killer, ghost, corpse, coins, *stuff;
    mapping wealth ;
    string *names ;
@@ -983,7 +983,7 @@ int environment_check() {
 		 this_object()));  
 return 0; }
  
-static int filter_env(object obj) {
+protected int filter_env(object obj) {
    return (interactive(obj) && visible(obj, this_object())); }
 
 /* EOF */

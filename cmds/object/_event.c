@@ -38,10 +38,10 @@ inherit TIME_D;
         "        event remove    [once/hourly/daily/weekly]\n" + \
         "        event list      [once/hourly/daily/weekly]\n"
 
-static int list_stack(string type);
-static int add_event(string type, int root);
-static int rem_event(string type);
-static int root_check(string perm);
+protected int list_stack(string type);
+protected int add_event(string type, int root);
+protected int rem_event(string type);
+protected int root_check(string perm);
 
 int busy;
 
@@ -98,7 +98,7 @@ int cmd_event(string str) {
 }
 
 
-static int root_check(string perm) {
+protected int root_check(string perm) {
     if (perm == ROOT_UID || adminp(perm))
         return 1;
 
@@ -106,7 +106,7 @@ static int root_check(string perm) {
 }
 
 
-static int list_stack(string type) {
+protected int list_stack(string type) {
     mixed *stack;
     int loop, s;
 
@@ -154,7 +154,7 @@ static int list_stack(string type) {
 }
 
 
-static int rem_event(string type) {
+protected int rem_event(string type) {
     mixed *stack;
 
     // Read in particular event stack for element check
@@ -177,7 +177,7 @@ static int rem_event(string type) {
 }
 
 
-static int del_number(string str, string type) {
+protected int del_number(string str, string type) {
     mixed *stack;
     int num;
 
@@ -212,7 +212,7 @@ static int del_number(string str, string type) {
 }
 
 
-static int add_event(string type, int root) {
+protected int add_event(string type, int root) {
     // Set busy flag on
     busy = 1;
 
@@ -223,7 +223,7 @@ static int add_event(string type, int root) {
 }
 
 
-static int receive_event(string str, string type, int root) {
+protected int receive_event(string str, string type, int root) {
     object target;
     string obj, func, arg;
 
@@ -264,7 +264,7 @@ static int receive_event(string str, string type, int root) {
 }
 
 
-static int process_time(string str, string type, int root, string obj,
+protected int process_time(string str, string type, int root, string obj,
             string func, string arg) {
     string when, permit, target;
     int date, month, day, year, hour, minute;

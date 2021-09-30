@@ -31,9 +31,9 @@
  
 inherit DAEMON;
  
-static int sweep_dir(string dir, int when, int verbose, int flag, int test);
-static int fail_test(string dri, string what, int when, int flag);
-static int remove_user(string where, int verbose, int flag, int test);
+protected int sweep_dir(string dir, int when, int verbose, int flag, int test);
+protected int fail_test(string dri, string what, int when, int flag);
+protected int remove_user(string where, int verbose, int flag, int test);
  
 object link;
 int total, busy;
@@ -136,7 +136,7 @@ void alert( int verbose, int test ) {
 //  This function sweeps through each of the user save subdirectories
 //  and check each user to see if they match the purge criteria.
  
-static int sweep_dir(string dir, int when, int verbose, int flag, int test) {
+protected int sweep_dir(string dir, int when, int verbose, int flag, int test) {
    string *contents;
    int loop, dinged;
  
@@ -160,7 +160,7 @@ static int sweep_dir(string dir, int when, int verbose, int flag, int test) {
 	}
 return 1; }
  
-static int fail_test(string dir, string what, int when, int flag) {
+protected int fail_test(string dir, string what, int when, int flag) {
    string name;
  
    //	Parse off the user's name ...
@@ -186,7 +186,7 @@ static int fail_test(string dir, string what, int when, int flag) {
 
 return 0; }
 
-static int remove_user(string where, int verbose, int flag, int test) {
+protected int remove_user(string where, int verbose, int flag, int test) {
    string name, wiz_dir, tmp;
  
    sscanf(where, "%s" + __SAVE_EXTENSION__, name);

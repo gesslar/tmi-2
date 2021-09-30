@@ -56,9 +56,9 @@ inherit DAEMON;
 
 #define error_rep(err)	printf( "%s: %s\n", query_verb(), err );
 
-static mixed *	commands;
-static object	act_ob;
-static int	flags;
+nosave mixed *	commands;
+nosave object	act_ob;
+nosave int	flags;
 
 //
 // Format of commands array:

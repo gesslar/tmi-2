@@ -9,14 +9,14 @@
  
 inherit DAEMON;
  
-static int grep_file(string pattern, string file, int count, int lnnum,
+protected int grep_file(string pattern, string file, int count, int lnnum,
 		     int nomat, int exact);
  
 #define SYNTAX	"Syntax: grep [-cnvx] [pattern] [file | directory]\n" + \
 		"        grep [-cnvx] [pattern] [file | directory] > [file]\n"
  
-static mixed *hold;
-static int matches, busy;
+nosave mixed *hold;
+nosave int matches, busy;
  
 int cmd_grep(string str) {
    string *files, pattern, pipe, where, flag, tmp1, tmp2;
@@ -127,7 +127,7 @@ int cmd_grep(string str) {
  
 return 1; }
  
-static int grep_file(string pattern, string file, int count, int lnnum,
+protected int grep_file(string pattern, string file, int count, int lnnum,
 		     int nomat, int exact) {
    string *lines, *tmp, *diff, dump;
    int loop;

@@ -15,10 +15,10 @@
  
 inherit DAEMON ;
  
-static string get_path(string str, int dir_flag);
-static string get_file(string str);
-static int copy_file(string from, string to);
-static int cp_file(string from, string to, int rflag, int iflag, int silent);
+protected string get_path(string str, int dir_flag);
+protected string get_file(string str);
+protected int copy_file(string from, string to);
+protected int cp_file(string from, string to, int rflag, int iflag, int silent);
  
 #define SYNTAX  "Syntax: cp [-rsfi] [source] [destination]\n"
  
@@ -155,7 +155,7 @@ int cmd_cp(string str) {
  
 return 1; }
  
-static int cp_file(string from, string to, int rflag, int iflag, int silent) {
+protected int cp_file(string from, string to, int rflag, int iflag, int silent) {
    mixed *tmp;
    int loop;
  
@@ -216,7 +216,7 @@ return 1; }
  
 //  This function does the actual file copying
  
-static int copy_file(string from, string to) {
+protected int copy_file(string from, string to) {
    string str;
    int size;
  
@@ -270,7 +270,7 @@ static int copy_file(string from, string to) {
 
 //  This function returns the file path of a passed file.
  
-static string get_path(string str, int dir_flag) {
+protected string get_path(string str, int dir_flag) {
    mixed *tmp;
    string path;
  
@@ -287,7 +287,7 @@ return path; }
  
 //  This function returns the filename without the whole file path
 
-static string get_file(string str) {
+protected string get_file(string str) {
    mixed *tmp;
 
    tmp = explode(str, "/");

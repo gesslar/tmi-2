@@ -81,7 +81,7 @@ user, otherwise it will give the name of the file where the function is
 defined.  get_objects() is used to locate the object, and shadows are
 also tested for.
   Note that findfunc will not find efuns or simul_efuns.  Neither will
-it detect static or private functions, as these cannot be detected by
+it detect protected or private functions, as these cannot be detected by
 function_exists() from the outside.
   findfunc is one of the reference set of commands, and will accept
 references for either argument. (see "help refs")

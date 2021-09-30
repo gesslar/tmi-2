@@ -60,10 +60,10 @@
 inherit SECURE_OBJECT;
 
 
-static int cmsg, maxmsg, start_flag, in_mailer, quitmailflag;
-static string owner, tmpfilename;
-static mapping newmsg;
-static string mail_a_file;
+nosave int cmsg, maxmsg, start_flag, in_mailer, quitmailflag;
+nosave string owner, tmpfilename;
+nosave mapping newmsg;
+nosave string mail_a_file;
 
 mapping	my_groups;
 mapping	*mailbox;
@@ -71,9 +71,9 @@ mapping	*mailbox;
 //      "from", "date", "cc", "subject", "message", "flags", "to"
 
 
-static void parse_mailcmd( string cmd );
+protected void parse_mailcmd( string cmd );
 void get_text();
-static void mail( string arg );
+protected void mail( string arg );
 
 
 void
@@ -203,7 +203,7 @@ int *numlist( string str ) {
 }
 
 
-static
+protected
 varargs void
 headers( int start, int newonly ) {
   int i, cnt, no_of_h;
@@ -246,7 +246,7 @@ headers( int start, int newonly ) {
 } // headers
 
 
-static
+protected
 string *
 expand_to( string *raw_list ) {
   int i, j;
@@ -318,7 +318,7 @@ prompt() {
 } // prompt
 
 
-static
+protected
 varargs void
 do_mail( string cmd ) {
   in_mailer = 1;
@@ -334,7 +334,7 @@ do_mail( string cmd ) {
 } // do_mail
 
 
-static
+protected
 void
 get_cc( string arg ) {
   int i, max;
@@ -369,7 +369,7 @@ get_cc( string arg ) {
 } // get_cc
 
 
-static
+protected
 void
 get_to( string arg ) {
   if( arg == "" )  {
@@ -402,7 +402,7 @@ get_to( string arg ) {
 } // get_to
 
 
-static
+protected
 void
 mail( string arg ) {
   sscanf( arg, "%s<%s", arg, mail_a_file );
@@ -450,7 +450,7 @@ do_from( string arg ) {
 } // do_from
 
 
-static
+protected
 int
 update_box() {
   int i, num;
@@ -468,7 +468,7 @@ update_box() {
 } // update_box
 
 
-static
+protected
 void
 do_quit( string cmd ) {
   int num, size;
@@ -505,7 +505,7 @@ done_more() {
 } // done_more
 
 
-static
+protected
 void
 get_subject( string sub ) {
   int i, max;
@@ -569,7 +569,7 @@ get_text() {
 }
 
 
-static
+protected
 void
 do_header( string arg ) {
   int start;
@@ -585,7 +585,7 @@ do_header( string arg ) {
 } // do_header
 
 
-static
+protected
 void
 do_setpos( string arg ) {
   int p;
@@ -598,7 +598,7 @@ do_setpos( string arg ) {
 } // do_setpos
 
 
-static
+protected
 void
 read_mail( int num ) {
   string tmp_msg, to, cc;
@@ -646,7 +646,7 @@ read_mail( int num ) {
 } // read_mail
 
 
-static
+protected
 void
 do_help( string arg ) {
   if( arg == "long" )
@@ -656,7 +656,7 @@ do_help( string arg ) {
 } // do_help
 
 
-static
+protected
 void
 delete_mail( string str ) {
   int i, num;
@@ -686,7 +686,7 @@ delete_mail( string str ) {
 } // delete_mail
 
 
-static
+protected
 void undelete_mail( string str ) {
   int num;
   
@@ -704,7 +704,7 @@ void undelete_mail( string str ) {
 } // undelete_mail
 
 
-static
+protected
 void do_reply( string cmd, string numstr ) {
   int num, i, max;
   
@@ -748,7 +748,7 @@ void do_reply( string cmd, string numstr ) {
 } // do_reply
 
 
-static
+protected
 void
 add_group( string str ) {
   string *members, *res, grp, a, b;
@@ -809,7 +809,7 @@ add_group( string str ) {
 } // add_group
 
 
-static
+protected
 void
 remove_group( string str ) {
   string *members;
@@ -845,7 +845,7 @@ remove_group( string str ) {
 } // remove_group
 
 
-static
+protected
 void
 do_groups( string arg ) {
   mapping grps;
@@ -877,7 +877,7 @@ do_groups( string arg ) {
 } // do_groups
 
 
-static
+protected
 void
 get_forward_to( string arg, int num ) {
   string t;
@@ -919,7 +919,7 @@ get_forward_to( string arg, int num ) {
 } // get_forward_to
 
 
-static
+protected
 void
 do_forward( string arg ) {
   string target;
@@ -954,7 +954,7 @@ do_forward( string arg ) {
 } // do_forward
 
 
-static
+protected
 varargs
 void
 do_save( string cmd, string arg, int flag )
@@ -1025,7 +1025,7 @@ From : %s\nTo : %s\n%s\nDate : %s\nSubject: %s\n\
 } // do_save
 
 
-static
+protected
 varargs
 void
 do_resync( int flag )
@@ -1041,7 +1041,7 @@ do_resync( int flag )
 } // do_resync
 
 
-static
+protected
 void
 parse_mailcmd( string cmd )
 {

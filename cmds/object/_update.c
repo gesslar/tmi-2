@@ -184,7 +184,7 @@ void display_errs(int origsiz, string logf)
 } /* display_errs */
 
 
-static void do_update(string file)
+protected void do_update(string file)
 {
     mixed	res;
     object	ob, *obs;

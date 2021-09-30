@@ -543,7 +543,7 @@ void set_leave_handler(mixed obj, string fun) {
  
 /* Maybe we should put "smartpresent" in 'obj/simul_efun.c' or somewhere? */
  
-static object smartpresent2(mixed what, mixed where) {
+protected object smartpresent2(mixed what, mixed where) {
     object obj, foundobj, *all_inv;
     string lwhat, lwhat2, junk;
     int i, n, the_number;

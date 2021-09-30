@@ -13,8 +13,8 @@ inherit DAEMON;
 #define HIGH 126
 // Would use 0 - 255 but read_file() reads ctrl's as spaces. 8-(
 
-static void do_encrypt( mixed a );
-static void save_file( mixed a );
+protected void do_encrypt( mixed a );
+protected void save_file( mixed a );
 
 int cmd_encrypt( mixed a )
 {
@@ -56,7 +56,7 @@ int cmd_encrypt( mixed a )
   return 1;
 }
 
-static void do_encrypt( mixed a )
+protected void do_encrypt( mixed a )
 {
   int i, s, k, *key;
   string newfile, oldfile;
@@ -87,7 +87,7 @@ static void do_encrypt( mixed a )
   }
 }
 
-static void save_file( mixed a )
+protected void save_file( mixed a )
 {
   string newfile, filename, euid, del;
   object player;

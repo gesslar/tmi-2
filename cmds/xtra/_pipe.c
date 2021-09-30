@@ -38,7 +38,7 @@ void _main( string arg )
  
 }
  
-static
+protected
 void handle_piping( string arg )
 {
  

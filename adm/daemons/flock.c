@@ -55,10 +55,7 @@ void log_change(string pathname, string flag);
 string query_file_change(string pathname);
 int get_timestamp(string pathname);
 
-#define PUBLIC
-#define PRIVATE static
-
-PUBLIC void create() {
+public void create() {
     seteuid(ROOT_UID);
     files = ({ });
     lockobjs = ({ });
@@ -71,7 +68,7 @@ PUBLIC void create() {
  *   If mode == F_UNLOCK, attempt to remove a file lock.
  *   Returns 1 if successful, 0 otherwise.
  */
-PUBLIC int flock(string pathname, int mode) {
+public int flock(string pathname, int mode) {
     int position;
     object tobj, locker;
 
@@ -163,7 +160,7 @@ PUBLIC int flock(string pathname, int mode) {
  *   Frees all locks associated with a player.
  *   Note: this function is called by /std/user.c
  */
-PUBLIC void free_lockobj(object player) {
+public void free_lockobj(object player) {
     int position;
     string tstr;
     string pathname;
@@ -192,7 +189,7 @@ PUBLIC void free_lockobj(object player) {
  * query_lockobj()
  *   Returns the object that owns that lock on "file"
  */
-PUBLIC object query_lockobj(string file) {
+public object query_lockobj(string file) {
     int i;
 
     if (!file || file == "") return 0;
@@ -208,7 +205,7 @@ PUBLIC object query_lockobj(string file) {
  * query_lockfn()
  *   Returns the name of _a_ file associated with the locking object.
  */
-PUBLIC string query_lockfn(object locker) {
+public string query_lockfn(object locker) {
     int i, j, k;
     string s, t;
 
@@ -232,7 +229,7 @@ PUBLIC string query_lockfn(object locker) {
  * get_timestamp()
  *   Returns the timestamp of a file, or 0 if the file doesn't exist.
  */
-PRIVATE int get_timestamp(string pathname) {
+protected int get_timestamp(string pathname) {
     mixed *stats;
     int position;
     int stamp;
@@ -249,7 +246,7 @@ PRIVATE int get_timestamp(string pathname) {
  * query_file_change()
  *   Returns a string that identifies the manner by which a file was changed.
  */
-PRIVATE string query_file_change(string pathname) {
+protected string query_file_change(string pathname) {
     mixed *stats;
     int position;
     int oldstamp, newstamp;
@@ -277,7 +274,7 @@ PRIVATE string query_file_change(string pathname) {
  * log_change()
  *   Logs file changes to the log file $(FILE_LOG).
  */
-PUBLIC void log_change(string pathname, string flag) {
+public void log_change(string pathname, string flag) {
     string s;
 
 #ifdef NON_CRITICAL_PATHS
@@ -335,7 +332,7 @@ PUBLIC void log_change(string pathname, string flag) {
  *   A debugging function that prints out a list of outstanding locks--
  *   filename, lock owner, timestamp of file.
  */
-PUBLIC void dump_locks() {
+public void dump_locks() {
     int i, j, k;
     string tstr, tstr2;
     object tobj;

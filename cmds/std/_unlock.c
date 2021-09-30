@@ -122,7 +122,7 @@ int cmd_unlock (string str) {
  
 return 1; }
  
-static int find_keys(object obj) {  return (int)obj->id("key");  }
+protected int find_keys(object obj) {  return (int)obj->id("key");  }
 
 int help() {
  

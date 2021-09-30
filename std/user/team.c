@@ -13,9 +13,9 @@
 #define LEADER (string)this_object()->query("leader")
 #define MAX 3
 
-private static mapping members;
-private static object *invited;
-private static object startenv;
+private nosave mapping members;
+private nosave object *invited;
+private nosave object startenv;
 
 void disband_team();
 void disband_member(object ob, int flag);

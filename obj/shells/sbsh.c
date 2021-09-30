@@ -52,7 +52,7 @@ mapping SBUFS;      /* scroll back buffers...a mapping of arrays */
 
 void pager(string s, string *arr, int i);
 
-nomask static void initialize() {
+nomask protected void initialize() {
     string tmp;
 
     OWNER = this_player();

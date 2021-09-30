@@ -49,15 +49,15 @@
  
 void logon(object ob);
 string active_users();
-static void get_name(string str, object ob);
-static void get_password(string pass, object ob, int count);
-static int check_password(string pass, object ob);
-static void choice(string choice, object ob, string name);
-static void register_site();
-static void exec_old_copy(string s, object ob);
-static void login_new_copy(object ob);
-static void enter_world(object ob);
-static void check_email(object user);
+protected void get_name(string str, object ob);
+protected void get_password(string pass, object ob, int count);
+protected int check_password(string pass, object ob);
+protected void choice(string choice, object ob, string name);
+protected void register_site();
+protected void exec_old_copy(string s, object ob);
+protected void login_new_copy(object ob);
+protected void enter_world(object ob);
+protected void check_email(object user);
  
  
 void create()
@@ -114,7 +114,7 @@ void logon(object ob)
 }
  
  
-static void get_name(string str, object ob)
+protected void get_name(string str, object ob)
 {
     string tmp, tmp1, tmp2;
     int bad_name, loop, i, sd_time;
@@ -253,14 +253,14 @@ write(NO_NEW_USERS);
 }
  
  
-static void remove_copy(object ob)
+protected void remove_copy(object ob)
 {
     if (ob)
 	ob->remove();
 }
  
  
-static void get_password(string pass, object ob, int count)
+protected void get_password(string pass, object ob, int count)
 {
     object body;
     int hibernate;
@@ -337,7 +337,7 @@ query_ip_name( ob ) + "\n" );
 }
  
  
-static
+protected
 void login_new_copy(object ob)
 {
     if (!ob->restore_body())
@@ -355,7 +355,7 @@ void login_new_copy(object ob)
 }
  
  
-static
+protected
 void exec_old_copy(string s, object user)
 {
     object tmp, link;
@@ -409,7 +409,7 @@ void exec_old_copy(string s, object user)
 }
  
  
-static void enter_world(object user)
+protected void enter_world(object user)
 {
     mixed *bad_pass;
  
@@ -426,7 +426,7 @@ static void enter_world(object user)
 }
  
  
-static int check_password(string pass, object ob)
+protected int check_password(string pass, object ob)
 {
     string password;
  
@@ -437,7 +437,7 @@ static int check_password(string pass, object ob)
 }
  
  
-static void choice(string choice, object user, string name)
+protected void choice(string choice, object user, string name)
 {
     int i;
     string pass;
@@ -552,7 +552,7 @@ string active_users()
 }
  
  
-static int filter_invis(object who)
+protected int filter_invis(object who)
 {
     if (!who || !environment(who))
 	// No logon's in display
@@ -569,7 +569,7 @@ static int filter_invis(object who)
  
  
 //  Switch user object pointer for name of user 
-static string switch_name(object who)
+protected string switch_name(object who)
 {
     return capitalize((string)who->query("name")) ;
 }

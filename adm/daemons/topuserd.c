@@ -23,10 +23,10 @@ inherit DAEMON;
  
 #define OUTPUT_FILE	"/log/top_user_list"
  
-static int create_shell();
-static int create_list();
-static int scan_dir(string dir);
-static int process_user(string who);
+protected int create_shell();
+protected int create_list();
+protected int scan_dir(string dir);
+protected int process_user(string who);
 
 mixed	*list;
  
@@ -43,7 +43,7 @@ void create() {
 //  skill stat system. If it cannot create a shell, it will
 //  terminate the top user list production cycle.
  
-static int create_shell() {
+protected int create_shell() {
    string err;
  
    err = catch( shell = new(USER_OB) );
@@ -129,7 +129,7 @@ return 1; }
 //  user subdirectories, and processes each of the user.o files
 //  for its skill stat value rankings.
  
-static int scan_dir(string dir) {
+protected int scan_dir(string dir) {
    string *files;
    int loop;
  
@@ -155,7 +155,7 @@ return 1; }
 //  the user's skill statistic score (or whatever mudlib dependent
 //  statistic system) for ranking.
  
-static int process_user(string who) {
+protected int process_user(string who) {
    mapping skills;
    string *askills, *junk, name;
    int loop, count;
@@ -218,14 +218,14 @@ mixed *query_list() {  return list;  }
  
 //  This function is used to sort the ranking array.
  
-static int rank_list(mixed *part1, mixed *part2) {
+protected int rank_list(mixed *part1, mixed *part2) {
 	return (part2[1] - part1[1]);  }
  
  
 //  This function produces the top user list output file. You may 
 //  wish to customize it to your own mudlib's needs and format.
  
-static int create_list() {
+protected int create_list() {
    string dump;
    int loop;
  

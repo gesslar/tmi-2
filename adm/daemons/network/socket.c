@@ -16,16 +16,16 @@
 //#define SKTLOG(x,y)	MUSTLOG(x,y)
 #define SKTLOG(x,y)
 
-static int	style;
-static int	fdOwned = -1;	/* no socket yet */
-static function	read_func;
-static function	close_func;
+nosave int	style;
+nosave int	fdOwned = -1;	/* no socket yet */
+nosave function	read_func;
+nosave function	close_func;
 
-static mixed *	write_queue = ({ });
-static int	blocked;
+nosave mixed *	write_queue = ({ });
+nosave int	blocked;
 
 /* For debug purposes only */
-static mixed addr;
+nosave mixed addr;
 int stat_me()
 {
     switch ( style )
@@ -201,7 +201,7 @@ SKTLOG("release_callback: err",err);
     catch(evaluate(read_func, this_object(), 0));
 }
 
-static nomask void read_callback(int fd, mixed message)
+protected nomask void read_callback(int fd, mixed message)
 {
     /* ### workaround an internal driver bug */
     restore_variable("0");
@@ -211,7 +211,7 @@ SKTLOG("read_callback: fd",fd);
     catch(evaluate(read_func, this_object(), message));
 }
 
-static nomask void read_udp_callback(int fd, mixed message, string address)
+protected nomask void read_udp_callback(int fd, mixed message, string address)
 {
 SKTLOG("read_udp_callback: self",this_object());
 SKTLOG("read_udp_callback: fd",fd);
@@ -219,7 +219,7 @@ SKTLOG("read_udp_callback: read_func",read_func);
     catch(evaluate(read_func, this_object(), message, address));
 }
 
-static nomask void close_callback(int fd)
+protected nomask void close_callback(int fd)
 {
 SKTLOG("close_callback: self",this_object());
 SKTLOG("close_callback: fd",fd);
@@ -232,7 +232,7 @@ SKTLOG("close_callback: close_func",close_func);
     destruct(this_object());
 }
 
-static nomask void write_callback(int fd)
+protected nomask void write_callback(int fd)
 {
 SKTLOG("write_callback: self",this_object());
 SKTLOG("write_callback: fd",fd);

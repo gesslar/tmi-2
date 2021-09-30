@@ -25,9 +25,9 @@
 #define HREF "<A HREF"
 #define HREFC "</A>"
  
-static mapping services;
-static int debug_level;
-static object www_socket;
+nosave mapping services;
+nosave int debug_level;
+nosave object www_socket;
 
 object victim;
  

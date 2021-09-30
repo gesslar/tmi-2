@@ -44,7 +44,7 @@ int cmd_setnews(string str) {
  
 return 1; }
  
-static int item_title(string str) {
+protected int item_title(string str) {
  
    if(!str || str == "")  str = "General news item.";
  
@@ -55,7 +55,7 @@ static int item_title(string str) {
  
 return 1; }
 
-static int news_level(string str) {
+protected int news_level(string str) {
  
    if(!str  || member_array(str, ({ "w", "p", "a" })) == -1)  {
    write("Setnews: Invalid response.\n");
@@ -68,7 +68,7 @@ static int news_level(string str) {
  
 return 1; }
  
-static int set_repeat(string str) {
+protected int set_repeat(string str) {
 
    //	Convert string input to its corresponding numerical value
  

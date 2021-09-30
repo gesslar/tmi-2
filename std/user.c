@@ -72,9 +72,9 @@ inherit LIVING ;
 /*
  * prototypes for local functions
  */
-static varargs void complete_setup (string str);
-static void die();
-static int create_ghost();
+protected varargs void complete_setup (string str);
+protected void die();
+protected int create_ghost();
 int coins_carried();
 void init_setup();
 void destroy_autoload_obj();
@@ -88,7 +88,7 @@ void basic_commands() {
     add_action("quit", "quit");
 }
 
-static void init_commands() {
+protect void init_commands() {
     string path;
 
     add_action( "cmd_hook", "", 1 );
@@ -109,7 +109,7 @@ static void init_commands() {
  * Setup standard user command hook system.  This system interfaces
  * with the cmd bin system, the environment's exits, and feeling entries.
  */
-nomask static int cmd_hook(string cmd) {
+nomask protected int cmd_hook(string cmd) {
     string file;
     string verb;
     int foo;
@@ -352,7 +352,7 @@ void continue_attack() {
     execute_attack();
 }
 
-static int loop, noise;
+protected int loop, noise;
 
 /*
  * This is the big, ugly CPU hogging function where the combat actually
@@ -789,7 +789,7 @@ void remove() {
     living::remove();
 }
 
-static int in_de_quit_script;
+nosave int in_de_quit_script;
 
 varargs int quit(string str) {
     object *stuff, *inv;
@@ -926,7 +926,7 @@ varargs int quit(string str) {
  * This function determines if the user has anything droppable
  * when they quit the mud.
  */
-static int inventory_check(object obj) {
+protect int inventory_check(object obj) {
     if (obj->query_auto_load())  return 0;
     if (!obj->query("short") || obj->query("prevent_drop"))  return 0;
     return 1;
@@ -1132,7 +1132,7 @@ void setup() {
  * Complete remainder of character setup after NEWS
  * has been read by the entering player
  */
-static varargs void complete_setup (string str) {
+protected varargs void complete_setup (string str) {
     object ghost;
     string temp;
     mixed student_time;
@@ -1254,7 +1254,7 @@ static varargs void complete_setup (string str) {
  * This function is called cyclically to save the user data
  * periodically, if AUTOSAVE is defined.
  */
-static void autosave_user() {
+protected void autosave_user() {
 
     remove_call_out("autosave_user");
     call_out("autosave_user", AUTOSAVE);
@@ -1298,7 +1298,7 @@ void heart_beat() {
  */
 nomask int query_linkdead() {  return !interactive(this_object());  }
 
-static
+protected
 void net_dead() {
 
     save_data();
@@ -1360,7 +1360,7 @@ void call_user_dump(string type) {
     quit();
 }
 
-static void die() {
+protected void die() {
     object killer, ghost, corpse, coins, *stuff;
     mapping wealth;
     string *names, name;
@@ -1528,7 +1528,7 @@ void hide(int i) {
 /*
  * support for debugging an error that a user encounters during this login
  */
-private static mapping last_error;
+private nosave mapping last_error;
 
 void set_error(mapping m) {
     if (previous_object() != master())

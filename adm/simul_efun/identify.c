@@ -22,9 +22,9 @@
 #define QUERY_NAME query_name()
 #endif /* __tmi__ */
 
-static mapping found;
-static string *position;
-static int recursion;
+nosave mapping found;
+nosave string *position;
+nosave int recursion;
 
 varargs string identify( mixed a, string indent )
 {

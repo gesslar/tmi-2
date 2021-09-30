@@ -39,7 +39,7 @@ int tell_user( object user, string mesg ) {
 // End tell_user()
 
 // Begin create_channel()
-static
+protected
 varargs
 int create_channel( string chan ) {
     if( channels[chan] ) return 1;
@@ -52,13 +52,13 @@ int create_channel( string chan ) {
 
 
 // Begin delete_channel()
-static int kill_user( object user, string chan ) {
+protected int kill_user( object user, string chan ) {
   if( undefinedp( channels[chan] ) ) return 0;
    channels[chan]["vis"] -= ({ user });
   return 1;
 }
 
-static varargs
+protected varargs
 int delete_channel( string chan ) {
     if( undefinedp( channels[chan] ) ) 
         return 0;
@@ -70,7 +70,7 @@ int delete_channel( string chan ) {
 
 
 // Beginning of add_user()
-static
+protected
 varargs
 int add_user(string chan, object user) {
     string *toggle_list;
@@ -105,7 +105,7 @@ int add_user(string chan, object user) {
 // End of add_user()
 
 
-static
+protected
 int kill_users( mixed chan ) {
   int i;
 
@@ -270,7 +270,7 @@ varargs mixed display_channel( string chan, object viewer ) {
 
 
 // Begin scan_config()
-static
+protected
 int scan_config() {
     string *list, *split_line;
     string line;

@@ -40,11 +40,11 @@ inherit "/std/body/more.c" ;
  
 // Rust changed this from static to nomask
 // 3-2-94
-static nomask object link ;
+nosave nomask object link ;
 
 
 private string __Term;
-static private mapping __TermInfo;
+nosave private mapping __TermInfo;
 
 
 // Prototypes. The important one is the user/nonuser recognition function.
@@ -54,7 +54,7 @@ void set_term(string str);
 string query_term();
 void basic_commands() ;
 mixed query_env (string env);
-static void init_commands();
+protected void init_commands();
 
 //  Connection link support functions
 
@@ -87,7 +87,7 @@ void debug(string mess) {
 //  This function switchs the user from its present body to
 //  that of a ghost when they "die".
  
-static object create_ghost() {
+protected object create_ghost() {
    object ghost, old;
  
    //	First confirm the body has a link

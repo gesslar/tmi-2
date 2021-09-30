@@ -8,7 +8,7 @@ inherit DAEMON ;
 
  
  
-static int move_contents(string path, int flag);
+protected int move_contents(string path, int flag);
  
 int clean_dir(string dir, int flag) {
    string tmp;
@@ -28,7 +28,7 @@ return move_contents(dir + "/", flag); }
  
 //  This function recursively cleans a specific directory path
 //  If flag = 1, it will not protect PROTECTed files
-static int move_contents(string path, int flag) {
+protected int move_contents(string path, int flag) {
    mixed *dir;
    string what;
    int loop;

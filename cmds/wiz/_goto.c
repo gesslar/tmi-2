@@ -13,7 +13,7 @@
 
 inherit DAEMON ;
 
-static int goto_location(object where);
+protected int goto_location(object where);
 
 #define SYNTAX	"Syntax: goto [-c] [location | living object]\n"
  
@@ -59,7 +59,7 @@ int cmd_goto(string str) {
  
 return 1; }
 
-static int goto_location(object where) {
+protected int goto_location(object where) {
    object old;
    int res;
  

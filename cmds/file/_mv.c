@@ -18,9 +18,9 @@
  
 inherit DAEMON ;
  
-static string get_path(string str, int dir_flag);
-static string get_file(string str);
-static int mv_file(string from, string to, int rflag, int iflag, int silent);
+protected string get_path(string str, int dir_flag);
+protected string get_file(string str);
+protected int mv_file(string from, string to, int rflag, int iflag, int silent);
  
 #define SYNTAX  "Syntax: mv [-rsfi] [source] [destination]\n"
  
@@ -187,7 +187,7 @@ int cmd_mv(string str) {
  
 return 1; }
  
-static int mv_file(string from, string to, int rflag, int iflag, int silent) {
+protected int mv_file(string from, string to, int rflag, int iflag, int silent) {
    mixed *tmp;
    int loop;
  
@@ -262,7 +262,7 @@ return 1; }
  
 //  This function returns the file path of a passed file.
  
-static string get_path(string str, int dir_flag) {
+protected string get_path(string str, int dir_flag) {
    mixed *tmp;
    string path;
  
@@ -279,7 +279,7 @@ return path; }
  
 //  This function returns the filename without the whole file path
 
-static string get_file(string str) {
+protected string get_file(string str) {
    mixed *tmp;
 
    tmp = explode(str, "/");
