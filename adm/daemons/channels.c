@@ -75,13 +75,12 @@ int admin_channel( string chan, object user, string* add_list,
 
 
 private varargs int
-create_channel(string chan, object user, string group, int mode,
-		object ref )
+create_channel(string chan, object user, string group, int mode, object reference )
 {
     if (channels[chan])
         return 1;
 
-    if( living(user) && ref ) {
+    if( living(user) && reference ) {
         // Create channel came from a real user
         I3_CHANNEL->daemon_apply( user, CRE, 
 		({ user->query("name"), chan, mode }) );
@@ -94,8 +93,8 @@ create_channel(string chan, object user, string group, int mode,
 
     if( group )
         channels[chan]["priv"]=group;
-    if( ref )
-        channels[chan]["object"]=chan+"#"+base_name(ref)+".c";
+    if( reference )
+        channels[chan]["object"]=chan+"#"+base_name(reference)+".c";
 
     return 1;
 }
@@ -587,7 +586,7 @@ register_channel(string chan, object user, int state, mixed *action )
 {
     int ret, mode;
     string group;
-    object ref;
+    object reference;
 
     if( origin() != ORIGIN_LOCAL && previous_object(1) && 
 	!adminp(previous_object(1)) && previous_object(1) != user) return 0;
@@ -604,11 +603,11 @@ register_channel(string chan, object user, int state, mixed *action )
                     ret=admin_channel( chan, user, action[0], action[1] );
                   break;
         case CRE: switch( sizeof( action ) ) {
-                        case 3: ref = action[2];
+                        case 3: reference = action[2];
                         case 2: mode = action[1];
                         case 1: group = action[0];
                   }
-                  ret = create_channel( chan, user, group, mode, ref ); 
+                  ret = create_channel( chan, user, group, mode, reference ); 
 		  break;
         case ADD: ret = add_user(chan, user);
 	          break;
